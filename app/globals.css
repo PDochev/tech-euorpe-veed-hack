@@ -12,8 +12,10 @@
   --color-ground: #f3f0e8;
   --color-panel: #faf8f3;
   --color-panel-2: #ffffff;
-  --color-line: #d8d2c4;
-  --color-line-bright: #c4bda9;
+  /* Near-neutral greys. A trace of warmth keeps them from going blue
+     against the paper ground; pure grey reads as dingy on a warm field. */
+  --color-line: #e4e2df;
+  --color-line-bright: #cbc8c3;
 
   --color-ink: #1a1c1f;
   --color-ink-dim: #5a5f68;
