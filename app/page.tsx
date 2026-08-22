@@ -158,7 +158,10 @@ export default function Console() {
       mcpServers: {
         portico: {
           command: "npx",
-          args: ["tsx", "<repo>/mcp-server/server.mts"],
+          args: ["tsx", "<absolute-path-to-this-repo>/mcp-server/server.mts"],
+          ...(username.trim() && password.trim()
+            ? { env: { PORTICO_USERNAME: username, PORTICO_PASSWORD: password } }
+            : {}),
         },
       },
     },
