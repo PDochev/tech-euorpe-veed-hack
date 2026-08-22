@@ -71,7 +71,13 @@ export function ToolCard({ tool, onRun, running, result }: Props) {
           </label>
         ))}
         <button
-          onClick={() => onRun(tool, args)}
+          onClick={() => {
+            const trimmed = Object.fromEntries(
+              Object.entries(args).map(([k, v]) => [k, v.trim()]),
+            );
+            setArgs(trimmed);
+            onRun(tool, trimmed);
+          }}
           disabled={running}
           className="btn-go px-3.5 py-1.5 text-[11px] uppercase tracking-[0.1em]"
         >

@@ -334,7 +334,7 @@ export async function executeRecipe(
   let output: string | null = null;
 
   for (const step of recipe) {
-    const value = step.arg ? (args[step.arg] ?? "") : (step.value ?? "");
+    const value = step.arg ? (args[step.arg] ?? "").trim() : (step.value ?? "");
 
     switch (step.action) {
       case "goto":
