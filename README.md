@@ -51,8 +51,7 @@ demo](https://opensource-demo.orangehrmlive.com) (`Admin` / `admin123`) — thei
 OrangeHRM OS, a real HR product with no public API. From one URL and a password, Portico compiles
 typed tools against the live screens (users, employees, directory, job titles, pay grades, skills).
 
-Credentials are optional. A public site such as [Awwwards](https://www.awwwards.com/) compiles
-without a username or password.
+Credentials are optional.
 
 Verified end to end:
 
@@ -266,7 +265,7 @@ The console's **copy** button is a template. The `<repo>` token is not a path �
 - **`portico`** — the name the agent sees. Any string is fine.
 - **`command` / `args`** — the client starts this process and talks to it over stdin/stdout. `npx tsx` runs the TypeScript file; Node 20+ and a network fetch of `tsx` on first run are required (or `npm install` in the repo so `tsx` is local).
 - **The path must be absolute.** `~/Projects/...` and `./mcp-server/server.mts` both fail in most MCP clients.
-- **`env`** — username/password the server uses when a tool logs into the target. OrangeHRM needs this. A public site (Awwwards) can omit `env`.
+- **`env`** — username/password the server uses when a tool logs into the target. OrangeHRM needs this.
 - The server also reads `tools.json` next to `server.mts` and launches Chromium via Playwright, so `npx playwright install chromium` must already have been run.
 
 ### Claude Code
@@ -372,13 +371,6 @@ Where this is honestly weak:
   can answer with a different application's URLs. Off-origin hints are now discarded in
   `h-scout.ts` and again in `explore.ts`, so the worst case is a thin site map rather than tools
   compiled against the wrong app. Recognising "this app has no records" and saying so is not built.
-- **Two shapes of target are proven, not “any website.”** OrangeHRM (login + records, 9 screens
-  → 7 tools) and Awwwards (public search, no credentials at all, 9 screens → 7 tools). Both ship as
-  committed fixtures, so `REPLAY=1 TARGET=https://www.awwwards.com npx tsx scripts/compile.ts`
-  replays the second one without a single API key. Cookie walls are dismissed at runtime; selectors
-  still break when the host redesigns. Content-heavy sites also expose a weakness: Awwwards yielded
-  1,855 controls of which 1,786 classified as `nav`, so the signal-to-noise ratio is far worse than
-  on a records-oriented admin panel.
 - **The read heuristic favours tables.** Apps that render records as prose or canvas will produce
   tools that return page text rather than structured rows.
 - **Local only.** The generated MCP server runs over stdio on the machine that compiled it.
