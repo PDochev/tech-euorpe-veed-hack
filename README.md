@@ -2,12 +2,10 @@
 
 **Compiles a web app that has no API into an MCP server.**
 
-Point Portico at a login page. It explores the app, works out what each control does, and writes a
-standalone MCP server with typed tools — `search_employees_by_name(employee_name)` — that any agent
-can call. Discovery is agentic and happens once. Execution is a compiled Playwright recipe with no
-model in the loop.
-
-![The Portico console after compiling the OrangeHRM demo](docs/console.png)
+Point Portico at a URL (abd login credentials if needed). It explores the app, works out
+what each control does, and writes a standalone MCP server with typed tools —
+`search_system_users(username)` — that any agent can call. Discovery is agentic and happens once.
+Execution is a compiled Playwright recipe with no model in the loop.
 
 ---
 
@@ -47,10 +45,13 @@ server (`mcp-server/server.mts`) contains no LLM calls whatsoever — grep it an
 
 **Video:** _(2-minute walkthrough — add the link here before submitting)_
 
-The screenshot above is a real run against the [OrangeHRM public
-demo](https://opensource-demo.orangehrmlive.com) (`Admin` / `admin123`), an entirely API-less HR
-admin app. From one URL and a password, Portico found 10 screens and 230 controls, and compiled 6
-parameterized tools.
+The walkthrough below is a real run against the [OrangeHRM public
+demo](https://opensource-demo.orangehrmlive.com) (`Admin` / `admin123`) — their hosted sandbox of
+OrangeHRM OS, a real HR product with no public API. From one URL and a password, Portico compiles
+typed tools against the live screens (users, employees, directory, job titles, pay grades, skills).
+
+Credentials are optional. A public site such as [Awwwards](https://www.awwwards.com/) compiles
+without a username or password.
 
 Verified end to end:
 
@@ -62,8 +63,69 @@ Calling search_system_users({"username":"Admin"})
 Admin | Admin | Emp_qBPmlQ User_hrEPXuHM | Enabled
 ```
 
-That same call takes 8.7 s from the console's **run** button, and returns the same record over MCP
+That same call takes ~9 s from the console's **run** button, and returns the same record over MCP
 `tools/call` through the generated server.
+
+## Demo script — delete this section after recording
+
+2-minute Loom. Have `npm run dev` already running. Compile OrangeHRM **before** you hit record so
+the pipeline is cached — a cold explore takes minutes and will blow the clock. When you press
+**compile** on camera it should stream from fixtures in a few seconds.
+
+**0:00–0:20 — the problem (talking over the idle console)**
+
+> Most software has no API. An agent that needs an employee record today either cannot do the
+> task, or burns a computer-use session on every call. Portico turns that into a compile step:
+> discovery is agentic and happens once; execution is a compiled Playwright recipe. No model at
+> runtime.
+
+Show the masthead. URL is already `https://opensource-demo.orangehrmlive.com`, username `Admin`,
+password `admin123`. Say this is OrangeHRM's public sandbox of a real HR product, not an app we
+built.
+
+**0:20–0:45 — compile**
+
+Press **compile**. Narrate the rail as stages light up:
+
+1. **Research / Tavily** — reads public docs, returns task-shaped capabilities.
+2. **Explore / h + Playwright** — a computer-use agent finds the record screens; Playwright
+   harvests exact selectors. h never supplies a selector.
+3. **Understand** — a rule table labels every control. No model. Same answer every run.
+4. **Compile / OpenAI** — one frontier call emits typed tools with step recipes.
+5. **Emit / MCP** — writes `mcp-server/server.mts`. Grep it: zero LLM calls.
+
+**0:45–1:20 — live walkthrough (the money shot)**
+
+Scroll to **Compiled tools**.
+
+1. `search_system_users` → type `Admin` → **run**. Wait for the row
+   (`Admin | Admin | … | Enabled`). Say: _that was a page load and three DOM actions, not an
+   agent session. Ask again and you pay the page load again, not another model._
+2. `list_skills` → **run** (no input). Rows like `Java | Programming Language` come from
+   Admin → Qualifications → Skills on the live demo, not from a fixture.
+
+Do **not** run every tool. Two is enough.
+
+**1:20–1:45 — attach to an agent**
+
+Scroll to **attach to an agent**. Click **copy**. Say:
+
+> The same runtime the console just used is now an MCP server. Paste this into Claude Code.
+> `search_system_users({ username: "Admin" })` is one tool call.
+
+Optional if you have Claude Code already wired: show the tool name in the session. Skip if it
+costs time.
+
+**1:45–2:00 — close**
+
+> Discovery once. Execution forever. The compiler used Tavily, h, and OpenAI. The generated
+> server uses none of them.
+
+Stop. Do not keep talking into the credits.
+
+**If compile is slow on camera:** cut, run `REPLAY=1 npm run dev`, record the rail from replay,
+then cut to a pre-recorded **run** against the live site. Judges care that the tool hits OrangeHRM,
+not that explore ran cold in the same take.
 
 ## 4. How it works
 
@@ -134,7 +196,8 @@ This is the one genuinely hard reasoning step, and it gets the frontier model. G
 the labelled controls and the documented capabilities, it emits tools with a JSON Schema and a step
 recipe. The load-bearing field is `Step.arg`: when set, that step takes its value from a named tool
 parameter at call time instead of a literal. That is the difference between a parameterized tool and
-a fixed macro. All 6 generated tools are parameterized.
+a fixed macro. Search tools are parameterized; list tools are macros that open a known screen and
+read its table.
 
 ### Stage 5 — emit (`app/_lib/mcp/emit.ts`)
 
@@ -157,6 +220,33 @@ deliberately using none of them.
 
 Playwright is the deterministic runtime underneath all of it (`app/_lib/driver/`), and
 `@modelcontextprotocol/sdk` writes the output.
+
+### APIs, frameworks, and tools
+
+Jury checklist — every dependency that is load-bearing, and the file that uses it.
+
+| Name                                                                     | Role                                      | Where                                           |
+| ------------------------------------------------------------------------ | ----------------------------------------- | ----------------------------------------------- |
+| [Next.js](https://nextjs.org) 16 (App Router, React 19)                  | Console UI and API routes                 | `app/`                                          |
+| TypeScript (strict)                                                      | Whole project                             | `tsconfig.json`                                 |
+| Tailwind CSS v4                                                          | Design tokens and layout                  | `app/globals.css`                               |
+| [Playwright](https://playwright.dev)                                     | Login, selector harvest, recipe execution | `app/_lib/driver/playwright.ts`                 |
+| [OpenAI API](https://platform.openai.com) (`gpt-5.5` by default)         | Distil docs; synthesize `ToolSpec[]`      | `app/_lib/stages/seed.ts`, `synthesize.ts`      |
+| [Tavily Search API](https://tavily.com)                                  | Public-docs seed                          | `app/_lib/stages/seed.ts`                       |
+| [h / hai-agents](https://hub.hcompany.ai/computer-use-agents/quickstart) | Computer-use scout                        | `app/_lib/stages/h-scout.ts`                    |
+| [Zod](https://zod.dev) v4                                                | Structured `answerSchema` for h           | `app/_lib/stages/h-scout.ts`                    |
+| [@modelcontextprotocol/sdk](https://modelcontextprotocol.io)             | Generated MCP server                      | `app/_lib/mcp/emit.ts`, `mcp-server/server.mts` |
+| `tsx`                                                                    | Run the generated server and CLI scripts  | `package.json`, `scripts/`                      |
+
+HTTP surface of this repo (not a public SaaS — local Next routes):
+
+| Method | Path            | Body                                           | Returns                             |
+| ------ | --------------- | ---------------------------------------------- | ----------------------------------- |
+| `POST` | `/api/compile`  | `{ target, username?, password? }`             | SSE stream of `StageEvent`          |
+| `POST` | `/api/run-tool` | `{ target, tool, args, username?, password? }` | `{ output, ms }` from a live recipe |
+
+The generated MCP server speaks stdio MCP: `tools/list` and `tools/call`. It reads
+`mcp-server/tools.json` and executes the same `runTool` the console uses.
 
 ## 6. Setup
 
@@ -189,7 +279,8 @@ Then:
 npm run dev     # http://localhost:3000
 ```
 
-Paste a URL and credentials into the console and press **compile**. The OrangeHRM demo
+Paste a URL into the console and press **compile**. Username and password are optional — leave
+them empty for a public site. The OrangeHRM sandbox
 (`https://opensource-demo.orangehrmlive.com`, `Admin` / `admin123`) is pre-filled.
 
 ### Running with no API keys at all
@@ -216,21 +307,27 @@ rather than a silent fallback to the network.
 
 ## 7. Using the generated MCP server
 
-Compiling writes `mcp-server/server.mts`, `mcp-server/tools.json` and a ready-made config. To attach
-it to Claude Code:
+Compile writes three files under `mcp-server/`:
 
-```bash
-claude mcp add portico -- npx tsx /absolute/path/to/repo/mcp-server/server.mts
-```
+| File                     | What it is                                                       |
+| ------------------------ | ---------------------------------------------------------------- |
+| `server.mts`             | The MCP server. Speaks stdio. Contains **no LLM calls**.         |
+| `tools.json`             | The compiled catalogue: names, JSON Schemas, Playwright recipes. |
+| `claude_mcp_config.json` | A paste-ready block with the **absolute path** on this machine.  |
 
-Or paste into your MCP client config (this is what the console's **copy** button gives you):
+The console's **copy** button is a template. The `<repo>` token is not a path — replace it, or use `claude_mcp_config.json` which already has yours.
+
+### What the JSON means
 
 ```json
 {
   "mcpServers": {
-    "portico-opensource-demo-orangehrmlive-com": {
+    "portico": {
       "command": "npx",
-      "args": ["tsx", "/absolute/path/to/repo/mcp-server/server.mts"],
+      "args": [
+        "tsx",
+        "/ABSOLUTE/PATH/TO/tech-euorpe-veed-hack/mcp-server/server.mts"
+      ],
       "env": {
         "PORTICO_USERNAME": "Admin",
         "PORTICO_PASSWORD": "admin123"
@@ -240,23 +337,91 @@ Or paste into your MCP client config (this is what the console's **copy** button
 }
 ```
 
-An example call and its result:
+- **`portico`** — the name the agent sees. Any string is fine.
+- **`command` / `args`** — the client starts this process and talks to it over stdin/stdout. `npx tsx` runs the TypeScript file; Node 20+ and a network fetch of `tsx` on first run are required (or `npm install` in the repo so `tsx` is local).
+- **The path must be absolute.** `~/Projects/...` and `./mcp-server/server.mts` both fail in most MCP clients.
+- **`env`** — username/password the server uses when a tool logs into the target. OrangeHRM needs this. A public site (Awwwards) can omit `env`.
+- The server also reads `tools.json` next to `server.mts` and launches Chromium via Playwright, so `npx playwright install chromium` must already have been run.
+
+### Claude Code
+
+From the repo root, after a compile:
+
+```bash
+claude mcp add portico -- npx tsx "$(pwd)/mcp-server/server.mts"
+```
+
+To pass OrangeHRM credentials:
+
+```bash
+claude mcp add portico --env PORTICO_USERNAME=Admin --env PORTICO_PASSWORD=admin123 -- npx tsx "$(pwd)/mcp-server/server.mts"
+```
+
+Restart the Claude Code session (or `/mcp`) so it picks the server up. Then:
+
+> Search OrangeHRM system users for username Admin.
+
+The agent should call `search_system_users` with `{ "username": "Admin" }`. A live row comes back in about 9 seconds. Follow-ups like “list the configured skills” hit `list_skills` with no arguments.
+
+Check it is attached: `claude mcp list`.
+
+### Cursor
+
+1. Open **Cursor Settings → MCP** (or edit `~/.cursor/mcp.json`).
+2. Merge the `mcpServers` object from `mcp-server/claude_mcp_config.json`.
+3. Add the `env` block if the target needs a login.
+4. Save. Cursor shows the server as connected; if it errors, the path is usually still relative.
+
+Project-local alternative: a `.cursor/mcp.json` in this repo with the same shape.
+
+### Claude Desktop
+
+Edit `~/Library/Application Support/Claude/claude_desktop_config.json` on macOS (or the equivalent on Windows/Linux). Paste the same `mcpServers` object, restart Claude Desktop.
+
+### Example calls
+
+Once the server is connected, these are the OrangeHRM tools from a recent compile:
+
+```jsonc
+{ "name": "search_system_users", "arguments": { "username": "Admin" } }
+{ "name": "search_employees_by_id", "arguments": { "employee_id": "0001" } }
+{ "name": "search_directory_by_employee_name", "arguments": { "employee_name": "Admin" } }
+{ "name": "search_navigation_menu", "arguments": { "query": "PIM" } }
+{ "name": "list_job_titles", "arguments": {} }
+{ "name": "list_pay_grades", "arguments": {} }
+{ "name": "list_skills", "arguments": {} }
+```
+
+Wire format the client sends:
 
 ```jsonc
 // tools/call
 { "name": "search_system_users", "arguments": { "username": "Admin" } }
 
-// result — a real row from the live OrangeHRM demo
+// result — a real row from the live OrangeHRM sandbox
 { "content": [{ "type": "text",
   "text": "Admin | Admin | Emp_qBPmlQ User_hrEPXuHM | Enabled" }] }
 ```
 
-(The demo instance is public and its employee names get overwritten by other visitors, so the
-values you see will differ — the shape will not.)
+(The sandbox is public; employee names get overwritten. The shape of the row does not change.)
 
-The six tools compiled from OrangeHRM: `search_system_users`, `search_employees_by_id`,
-`search_employees_by_name`, `search_candidate_keywords`, `search_candidates_by_application_date`,
-`search_employee_timesheets`.
+You can also call a tool without an agent:
+
+```bash
+npx tsx scripts/run-tool.ts search_system_users username=Admin
+```
+
+(`scripts/run-tool.ts` currently targets OrangeHRM. Set `TARGET` if you compiled a different site.)
+
+### If it does not start
+
+- **`npx tsx` not found** — run `npm install` in this repo.
+- **Playwright browser missing** — `npx playwright install chromium`.
+- **Login fails / empty tables** — `PORTICO_USERNAME` / `PORTICO_PASSWORD` not set, or the sandbox password changed.
+- **Cookie wall on a public site** — the runtime dismisses common banners; a new overlay still needs a recompile or a driver tweak.
+- **Stale tools** — compile again; `server.mts` and `tools.json` are overwritten.
+
+Recompiling can change the tool set — synthesis is not frozen. A recent OrangeHRM compile produced the seven names listed above.
 
 ## 8. Project layout
 
@@ -300,8 +465,9 @@ Where this is honestly weak:
 - **No write-tool safety rails.** The compiler can describe `destructive` controls but there is no
   confirmation step, dry-run or audit log, so we deliberately kept the demo to read and search
   tools. Writes need a human-in-the-loop gate before they should exist at all.
-- **Auth is username/password only.** No SSO, MFA, or session reuse; credentials are passed to the
-  generated server via environment variables.
+- **Auth is username/password or none.** Public sites compile with empty credentials. There is no
+  SSO, MFA, or session reuse; when a login is needed, credentials are passed to the generated
+  server via environment variables.
 - **Stage 3's rules read English.** Classifying controls by label text is fast, free and
   reproducible, but it is monolingual and it inherits whatever vocabulary the app uses — a German
   admin panel, or one that labels its search box "Lookup", degrades to `other` and produces flatter
@@ -313,8 +479,9 @@ Where this is honestly weak:
   can answer with a different application's URLs. Off-origin hints are now discarded in
   `h-scout.ts` and again in `explore.ts`, so the worst case is a thin site map rather than tools
   compiled against the wrong app. Recognising "this app has no records" and saying so is not built.
-- **One target app is proven.** Portico was built and verified against OrangeHRM. The stages are
-  app-agnostic by construction, but "works on any admin panel" is a claim we have not earned yet.
+- **Two shapes of target are proven, not “any website.”** OrangeHRM (login + records) and
+  Awwwards (public search). Cookie walls are dismissed at runtime; selectors still break when the
+  host redesigns.
 - **The read heuristic favours tables.** Apps that render records as prose or canvas will produce
   tools that return page text rather than structured rows.
 - **Local only.** The generated MCP server runs over stdio on the machine that compiled it.
