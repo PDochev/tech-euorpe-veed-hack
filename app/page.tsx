@@ -5,7 +5,13 @@ import { LogStream, type LogLine } from "./_components/LogStream";
 import { PipelineRail, type StageState } from "./_components/PipelineRail";
 import { ScreenModal } from "./_components/ScreenModal";
 import { ToolCard } from "./_components/ToolCard";
-import type { Screen, SiteMap, StageEvent, StageName, ToolSpec } from "./_lib/types";
+import type {
+  Screen,
+  SiteMap,
+  StageEvent,
+  StageName,
+  ToolSpec,
+} from "./_lib/types";
 
 const IDLE: Record<StageName, StageState> = {
   seed: { status: "idle", label: "Read the app's documentation" },
@@ -162,7 +168,9 @@ export default function Console() {
           command: "npx",
           args: ["tsx", "<absolute-path-to-this-repo>/mcp-server/server.mts"],
           ...(username.trim() && password.trim()
-            ? { env: { PORTICO_USERNAME: username, PORTICO_PASSWORD: password } }
+            ? {
+                env: { PORTICO_USERNAME: username, PORTICO_PASSWORD: password },
+              }
             : {}),
         },
       },
