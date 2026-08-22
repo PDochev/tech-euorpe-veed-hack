@@ -1,6 +1,105 @@
 {
   "target": "https://opensource-demo.orangehrmlive.com",
-  "capabilities": [],
+  "capabilities": [
+    {
+      "name": "Dashboard",
+      "description": "Main overview screen with Time at Work, My Actions, Quick Launch, and employee metrics",
+      "url": "https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index",
+      "source": "h"
+    },
+    {
+      "name": "System Users Management",
+      "description": "List and filter system users with search and add capabilities",
+      "url": "https://opensource-demo.orangehrmlive.com/web/index.php/admin/viewSystemUsers",
+      "source": "h"
+    },
+    {
+      "name": "Job Titles Management",
+      "description": "List 28 job titles with search, filter, and CRUD operations",
+      "url": "https://opensource-demo.orangehrmlive.com/web/index.php/admin/viewJobTitleList",
+      "source": "h"
+    },
+    {
+      "name": "Pay Grades Management",
+      "description": "List and configure 5 pay grades with grade ranges",
+      "url": "https://opensource-demo.orangehrmlive.com/web/index.php/admin/viewPayGrades",
+      "source": "h"
+    },
+    {
+      "name": "Organization Structure",
+      "description": "Visual company hierarchy with sub-unit management",
+      "url": "https://opensource-demo.orangehrmlive.com/web/index.php/admin/viewCompanyStructure",
+      "source": "h"
+    },
+    {
+      "name": "Skills Management",
+      "description": "List 21 skills with search and categorization",
+      "url": "https://opensource-demo.orangehrmlive.com/web/index.php/admin/viewSkills",
+      "source": "h"
+    },
+    {
+      "name": "Employee List (PIM)",
+      "description": "Browse and filter employee records with search by name, title, location",
+      "url": "https://opensource-demo.orangehrmlive.com/web/index.php/pim/viewEmployeeList",
+      "source": "h"
+    },
+    {
+      "name": "Directory",
+      "description": "Employee contact directory with 135 records, searchable by name, job title, and location",
+      "url": "https://opensource-demo.orangehrmlive.com/web/index.php/directory/viewDirectory",
+      "source": "h"
+    },
+    {
+      "name": "Edit company basic information",
+      "description": "Update the organization’s core company details from the Admin module and save the changes.",
+      "source": "tavily"
+    },
+    {
+      "name": "Configure company structure",
+      "description": "Define departments, organizational units, and other company structure settings.",
+      "source": "tavily"
+    },
+    {
+      "name": "Manage job titles and job descriptions",
+      "description": "Create or update job titles and their associated descriptions for the organization.",
+      "source": "tavily"
+    },
+    {
+      "name": "Set up pay grades",
+      "description": "Define pay grade levels used in the HR system.",
+      "source": "tavily"
+    },
+    {
+      "name": "Manage user access rights and roles",
+      "description": "Create and assign roles or permissions to control what users can access in the system.",
+      "source": "tavily"
+    },
+    {
+      "name": "Configure security settings",
+      "description": "Adjust system security-related settings that affect administrative access and control.",
+      "source": "tavily"
+    },
+    {
+      "name": "Manage skills and qualifications",
+      "description": "Add and maintain skills and qualification records used in HR profiles.",
+      "source": "tavily"
+    },
+    {
+      "name": "Set up customer and project records",
+      "description": "Create and maintain customer and project entries in the Admin module.",
+      "source": "tavily"
+    },
+    {
+      "name": "Maintain employee contact and emergency information",
+      "description": "View or edit contact details, emergency contacts, and dependent information for employees.",
+      "source": "tavily"
+    },
+    {
+      "name": "Manage employee immigration records",
+      "description": "Add and update immigration information and documents for employees.",
+      "source": "tavily"
+    }
+  ],
   "screens": [
     {
       "id": "s0",
@@ -130,16 +229,16 @@
         },
         {
           "selector": "ul.oxd-chart-legend",
-          "preview": "EngineeringHuman ResourcesAdministrationClient ServicesUnassigned",
+          "preview": "EngineeringAdministrationHuman ResourcesClient ServicesUnassigned",
           "rowCount": 5
         }
       ]
     },
     {
-      "id": "s1",
+      "id": "s2",
       "url": "https://opensource-demo.orangehrmlive.com/web/index.php/admin/viewSystemUsers",
       "title": "OrangeHRM",
-      "screenshot": "/shots/s1.png",
+      "screenshot": "/shots/s2.png",
       "elements": [
         {
           "id": "e1",
@@ -301,7 +400,160 @@
           "inputType": "button"
         },
         {
-          "id": "e66",
+          "id": "e39",
+          "selector": "a[href=\"http://www.orangehrm.com\"]",
+          "kind": "link",
+          "label": "OrangeHRM, Inc",
+          "nearbyText": "OrangeHRM OS 5.9© 2005 - 2026 OrangeHRM, Inc. All rights reserved."
+        }
+      ],
+      "resultContainers": [
+        {
+          "selector": "ul.oxd-main-menu",
+          "preview": "AdminPIMLeaveTimeRecruitmentMy InfoPerformanceDashboardDirectoryMaintenanceClaimBuzz",
+          "rowCount": 12
+        },
+        {
+          "selector": "div.oxd-table-body",
+          "preview": "AdminAdminSpooder Test ManEnabledFMLNameESSQwerty LNameEnabledFMLName1ESSFName LNameEnabledJobinsam@6742ESSJobin SamEnabled",
+          "rowCount": 4
+        },
+        {
+          "selector": "div.oxd-table",
+          "preview": "UsernameAscendingDescendingUser RoleAscendingDescendingEmployee NameAscendingDescendingStatusAscendingDescendingActionsAdminAdminSpooder Test ManEnabledFMLNameE",
+          "rowCount": 2
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "url": "https://opensource-demo.orangehrmlive.com/web/index.php/admin/viewJobTitleList",
+      "title": "OrangeHRM",
+      "screenshot": "/shots/s3.png",
+      "elements": [
+        {
+          "id": "e1",
+          "selector": "input[placeholder=\"Search\"]",
+          "kind": "input",
+          "label": "Search",
+          "nearbyText": ""
+        },
+        {
+          "id": "e3",
+          "selector": "a[href=\"/web/index.php/admin/viewAdminModule\"]",
+          "kind": "link",
+          "label": "Admin",
+          "nearbyText": "Admin"
+        },
+        {
+          "id": "e4",
+          "selector": "a[href=\"/web/index.php/pim/viewPimModule\"]",
+          "kind": "link",
+          "label": "PIM",
+          "nearbyText": "PIM"
+        },
+        {
+          "id": "e5",
+          "selector": "a[href=\"/web/index.php/leave/viewLeaveModule\"]",
+          "kind": "link",
+          "label": "Leave",
+          "nearbyText": "Leave"
+        },
+        {
+          "id": "e6",
+          "selector": "a[href=\"/web/index.php/time/viewTimeModule\"]",
+          "kind": "link",
+          "label": "Time",
+          "nearbyText": "Time"
+        },
+        {
+          "id": "e7",
+          "selector": "a[href=\"/web/index.php/recruitment/viewRecruitmentModule\"]",
+          "kind": "link",
+          "label": "Recruitment",
+          "nearbyText": "Recruitment"
+        },
+        {
+          "id": "e8",
+          "selector": "a[href=\"/web/index.php/pim/viewMyDetails\"]",
+          "kind": "link",
+          "label": "My Info",
+          "nearbyText": "My Info"
+        },
+        {
+          "id": "e9",
+          "selector": "a[href=\"/web/index.php/performance/viewPerformanceModule\"]",
+          "kind": "link",
+          "label": "Performance",
+          "nearbyText": "Performance"
+        },
+        {
+          "id": "e10",
+          "selector": "a[href=\"/web/index.php/dashboard/index\"]",
+          "kind": "link",
+          "label": "Dashboard",
+          "nearbyText": "Dashboard"
+        },
+        {
+          "id": "e11",
+          "selector": "a[href=\"/web/index.php/directory/viewDirectory\"]",
+          "kind": "link",
+          "label": "Directory",
+          "nearbyText": "Directory"
+        },
+        {
+          "id": "e12",
+          "selector": "a[href=\"/web/index.php/maintenance/viewMaintenanceModule\"]",
+          "kind": "link",
+          "label": "Maintenance",
+          "nearbyText": "Maintenance"
+        },
+        {
+          "id": "e13",
+          "selector": "a[href=\"/web/index.php/claim/viewClaimModule\"]",
+          "kind": "link",
+          "label": "Claim",
+          "nearbyText": "Claim"
+        },
+        {
+          "id": "e14",
+          "selector": "a[href=\"/web/index.php/buzz/viewBuzz\"]",
+          "kind": "link",
+          "label": "Buzz",
+          "nearbyText": "Buzz"
+        },
+        {
+          "id": "e15",
+          "selector": "a[href=\"https://orangehrm.com/open-source/upgrade-to-advanced\"]",
+          "kind": "link",
+          "label": "Upgrade",
+          "nearbyText": "Upgrade"
+        },
+        {
+          "id": "e16",
+          "selector": "button:has-text(\"Upgrade\")",
+          "kind": "button",
+          "label": "Upgrade",
+          "nearbyText": "Upgrade",
+          "inputType": "button"
+        },
+        {
+          "id": "e17",
+          "selector": "a[href=\"#\"]",
+          "kind": "link",
+          "label": "Nationalities",
+          "nearbyText": "Nationalities"
+        },
+        {
+          "id": "e20",
+          "selector": "button:has-text(\"Add\")",
+          "kind": "button",
+          "label": "Add",
+          "nearbyText": "Add",
+          "inputType": "button"
+        },
+        {
+          "id": "e106",
           "selector": "a[href=\"http://www.orangehrm.com\"]",
           "kind": "link",
           "label": "OrangeHRM, Inc",
@@ -311,8 +563,8 @@
       "resultContainers": [
         {
           "selector": "div.oxd-table-body",
-          "preview": "AdminAdminHugo MuskEnabledakshayAdminRanga AkunuriEnabledashishAdminRanga AkunuriEnabledFMLName1ESSFName LNameEnabledJobinsam@6742ESSJobin SamEnabledMD1234Admin",
-          "rowCount": 13
+          "preview": "Account AssistantAutomaton TesterChief Executive OfficerChief Financial OfficerChief Technical OfficerContent SpecialistCustomer Success ManagerDatabase Adminis",
+          "rowCount": 28
         },
         {
           "selector": "ul.oxd-main-menu",
@@ -321,16 +573,465 @@
         },
         {
           "selector": "div.oxd-table",
-          "preview": "UsernameAscendingDescendingUser RoleAscendingDescendingEmployee NameAscendingDescendingStatusAscendingDescendingActionsAdminAdminHugo MuskEnabledakshayAdminRang",
+          "preview": "Job TitlesAscendingDescendingJob DescriptionActionsAccount AssistantAutomaton TesterChief Executive OfficerChief Financial OfficerChief Technical OfficerContent",
           "rowCount": 2
         }
       ]
     },
     {
-      "id": "s2",
+      "id": "s4",
+      "url": "https://opensource-demo.orangehrmlive.com/web/index.php/admin/viewPayGrades",
+      "title": "OrangeHRM",
+      "screenshot": "/shots/s4.png",
+      "elements": [
+        {
+          "id": "e1",
+          "selector": "input[placeholder=\"Search\"]",
+          "kind": "input",
+          "label": "Search",
+          "nearbyText": ""
+        },
+        {
+          "id": "e3",
+          "selector": "a[href=\"/web/index.php/admin/viewAdminModule\"]",
+          "kind": "link",
+          "label": "Admin",
+          "nearbyText": "Admin"
+        },
+        {
+          "id": "e4",
+          "selector": "a[href=\"/web/index.php/pim/viewPimModule\"]",
+          "kind": "link",
+          "label": "PIM",
+          "nearbyText": "PIM"
+        },
+        {
+          "id": "e5",
+          "selector": "a[href=\"/web/index.php/leave/viewLeaveModule\"]",
+          "kind": "link",
+          "label": "Leave",
+          "nearbyText": "Leave"
+        },
+        {
+          "id": "e6",
+          "selector": "a[href=\"/web/index.php/time/viewTimeModule\"]",
+          "kind": "link",
+          "label": "Time",
+          "nearbyText": "Time"
+        },
+        {
+          "id": "e7",
+          "selector": "a[href=\"/web/index.php/recruitment/viewRecruitmentModule\"]",
+          "kind": "link",
+          "label": "Recruitment",
+          "nearbyText": "Recruitment"
+        },
+        {
+          "id": "e8",
+          "selector": "a[href=\"/web/index.php/pim/viewMyDetails\"]",
+          "kind": "link",
+          "label": "My Info",
+          "nearbyText": "My Info"
+        },
+        {
+          "id": "e9",
+          "selector": "a[href=\"/web/index.php/performance/viewPerformanceModule\"]",
+          "kind": "link",
+          "label": "Performance",
+          "nearbyText": "Performance"
+        },
+        {
+          "id": "e10",
+          "selector": "a[href=\"/web/index.php/dashboard/index\"]",
+          "kind": "link",
+          "label": "Dashboard",
+          "nearbyText": "Dashboard"
+        },
+        {
+          "id": "e11",
+          "selector": "a[href=\"/web/index.php/directory/viewDirectory\"]",
+          "kind": "link",
+          "label": "Directory",
+          "nearbyText": "Directory"
+        },
+        {
+          "id": "e12",
+          "selector": "a[href=\"/web/index.php/maintenance/viewMaintenanceModule\"]",
+          "kind": "link",
+          "label": "Maintenance",
+          "nearbyText": "Maintenance"
+        },
+        {
+          "id": "e13",
+          "selector": "a[href=\"/web/index.php/claim/viewClaimModule\"]",
+          "kind": "link",
+          "label": "Claim",
+          "nearbyText": "Claim"
+        },
+        {
+          "id": "e14",
+          "selector": "a[href=\"/web/index.php/buzz/viewBuzz\"]",
+          "kind": "link",
+          "label": "Buzz",
+          "nearbyText": "Buzz"
+        },
+        {
+          "id": "e15",
+          "selector": "a[href=\"https://orangehrm.com/open-source/upgrade-to-advanced\"]",
+          "kind": "link",
+          "label": "Upgrade",
+          "nearbyText": "Upgrade"
+        },
+        {
+          "id": "e16",
+          "selector": "button:has-text(\"Upgrade\")",
+          "kind": "button",
+          "label": "Upgrade",
+          "nearbyText": "Upgrade",
+          "inputType": "button"
+        },
+        {
+          "id": "e17",
+          "selector": "a[href=\"#\"]",
+          "kind": "link",
+          "label": "Nationalities",
+          "nearbyText": "Nationalities"
+        },
+        {
+          "id": "e20",
+          "selector": "button:has-text(\"Add\")",
+          "kind": "button",
+          "label": "Add",
+          "nearbyText": "Add",
+          "inputType": "button"
+        },
+        {
+          "id": "e37",
+          "selector": "a[href=\"http://www.orangehrm.com\"]",
+          "kind": "link",
+          "label": "OrangeHRM, Inc",
+          "nearbyText": "OrangeHRM OS 5.9© 2005 - 2026 OrangeHRM, Inc. All rights reserved."
+        }
+      ],
+      "resultContainers": [
+        {
+          "selector": "ul.oxd-main-menu",
+          "preview": "AdminPIMLeaveTimeRecruitmentMy InfoPerformanceDashboardDirectoryMaintenanceClaimBuzz",
+          "rowCount": 12
+        },
+        {
+          "selector": "div.oxd-table-body",
+          "preview": "Grade 1United States DollarGrade 2United States DollarGrade 3United States DollarGrade 4United States DollarGrade 5United States Dollar",
+          "rowCount": 5
+        },
+        {
+          "selector": "div.oxd-table",
+          "preview": "NameCurrencyActionsGrade 1United States DollarGrade 2United States DollarGrade 3United States DollarGrade 4United States DollarGrade 5United States Dollar",
+          "rowCount": 2
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "url": "https://opensource-demo.orangehrmlive.com/web/index.php/admin/viewCompanyStructure",
+      "title": "OrangeHRM",
+      "screenshot": "/shots/s5.png",
+      "elements": [
+        {
+          "id": "e1",
+          "selector": "input[placeholder=\"Search\"]",
+          "kind": "input",
+          "label": "Search",
+          "nearbyText": ""
+        },
+        {
+          "id": "e3",
+          "selector": "a[href=\"/web/index.php/admin/viewAdminModule\"]",
+          "kind": "link",
+          "label": "Admin",
+          "nearbyText": "Admin"
+        },
+        {
+          "id": "e4",
+          "selector": "a[href=\"/web/index.php/pim/viewPimModule\"]",
+          "kind": "link",
+          "label": "PIM",
+          "nearbyText": "PIM"
+        },
+        {
+          "id": "e5",
+          "selector": "a[href=\"/web/index.php/leave/viewLeaveModule\"]",
+          "kind": "link",
+          "label": "Leave",
+          "nearbyText": "Leave"
+        },
+        {
+          "id": "e6",
+          "selector": "a[href=\"/web/index.php/time/viewTimeModule\"]",
+          "kind": "link",
+          "label": "Time",
+          "nearbyText": "Time"
+        },
+        {
+          "id": "e7",
+          "selector": "a[href=\"/web/index.php/recruitment/viewRecruitmentModule\"]",
+          "kind": "link",
+          "label": "Recruitment",
+          "nearbyText": "Recruitment"
+        },
+        {
+          "id": "e8",
+          "selector": "a[href=\"/web/index.php/pim/viewMyDetails\"]",
+          "kind": "link",
+          "label": "My Info",
+          "nearbyText": "My Info"
+        },
+        {
+          "id": "e9",
+          "selector": "a[href=\"/web/index.php/performance/viewPerformanceModule\"]",
+          "kind": "link",
+          "label": "Performance",
+          "nearbyText": "Performance"
+        },
+        {
+          "id": "e10",
+          "selector": "a[href=\"/web/index.php/dashboard/index\"]",
+          "kind": "link",
+          "label": "Dashboard",
+          "nearbyText": "Dashboard"
+        },
+        {
+          "id": "e11",
+          "selector": "a[href=\"/web/index.php/directory/viewDirectory\"]",
+          "kind": "link",
+          "label": "Directory",
+          "nearbyText": "Directory"
+        },
+        {
+          "id": "e12",
+          "selector": "a[href=\"/web/index.php/maintenance/viewMaintenanceModule\"]",
+          "kind": "link",
+          "label": "Maintenance",
+          "nearbyText": "Maintenance"
+        },
+        {
+          "id": "e13",
+          "selector": "a[href=\"/web/index.php/claim/viewClaimModule\"]",
+          "kind": "link",
+          "label": "Claim",
+          "nearbyText": "Claim"
+        },
+        {
+          "id": "e14",
+          "selector": "a[href=\"/web/index.php/buzz/viewBuzz\"]",
+          "kind": "link",
+          "label": "Buzz",
+          "nearbyText": "Buzz"
+        },
+        {
+          "id": "e15",
+          "selector": "a[href=\"https://orangehrm.com/open-source/upgrade-to-advanced\"]",
+          "kind": "link",
+          "label": "Upgrade",
+          "nearbyText": "Upgrade"
+        },
+        {
+          "id": "e16",
+          "selector": "button:has-text(\"Upgrade\")",
+          "kind": "button",
+          "label": "Upgrade",
+          "nearbyText": "Upgrade",
+          "inputType": "button"
+        },
+        {
+          "id": "e17",
+          "selector": "a[href=\"#\"]",
+          "kind": "link",
+          "label": "Nationalities",
+          "nearbyText": "Nationalities"
+        },
+        {
+          "id": "e20",
+          "selector": "div.oxd-switch-wrapper:has-text(\"Edit\") >> input",
+          "kind": "input",
+          "label": "Edit",
+          "nearbyText": "Edit",
+          "inputType": "checkbox"
+        },
+        {
+          "id": "e25",
+          "selector": "a[href=\"http://www.orangehrm.com\"]",
+          "kind": "link",
+          "label": "OrangeHRM, Inc",
+          "nearbyText": "OrangeHRM OS 5.9© 2005 - 2026 OrangeHRM, Inc. All rights reserved."
+        }
+      ],
+      "resultContainers": [
+        {
+          "selector": "ul.oxd-main-menu",
+          "preview": "AdminPIMLeaveTimeRecruitmentMy InfoPerformanceDashboardDirectoryMaintenanceClaimBuzz",
+          "rowCount": 12
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "url": "https://opensource-demo.orangehrmlive.com/web/index.php/admin/viewSkills",
+      "title": "OrangeHRM",
+      "screenshot": "/shots/s6.png",
+      "elements": [
+        {
+          "id": "e1",
+          "selector": "input[placeholder=\"Search\"]",
+          "kind": "input",
+          "label": "Search",
+          "nearbyText": ""
+        },
+        {
+          "id": "e3",
+          "selector": "a[href=\"/web/index.php/admin/viewAdminModule\"]",
+          "kind": "link",
+          "label": "Admin",
+          "nearbyText": "Admin"
+        },
+        {
+          "id": "e4",
+          "selector": "a[href=\"/web/index.php/pim/viewPimModule\"]",
+          "kind": "link",
+          "label": "PIM",
+          "nearbyText": "PIM"
+        },
+        {
+          "id": "e5",
+          "selector": "a[href=\"/web/index.php/leave/viewLeaveModule\"]",
+          "kind": "link",
+          "label": "Leave",
+          "nearbyText": "Leave"
+        },
+        {
+          "id": "e6",
+          "selector": "a[href=\"/web/index.php/time/viewTimeModule\"]",
+          "kind": "link",
+          "label": "Time",
+          "nearbyText": "Time"
+        },
+        {
+          "id": "e7",
+          "selector": "a[href=\"/web/index.php/recruitment/viewRecruitmentModule\"]",
+          "kind": "link",
+          "label": "Recruitment",
+          "nearbyText": "Recruitment"
+        },
+        {
+          "id": "e8",
+          "selector": "a[href=\"/web/index.php/pim/viewMyDetails\"]",
+          "kind": "link",
+          "label": "My Info",
+          "nearbyText": "My Info"
+        },
+        {
+          "id": "e9",
+          "selector": "a[href=\"/web/index.php/performance/viewPerformanceModule\"]",
+          "kind": "link",
+          "label": "Performance",
+          "nearbyText": "Performance"
+        },
+        {
+          "id": "e10",
+          "selector": "a[href=\"/web/index.php/dashboard/index\"]",
+          "kind": "link",
+          "label": "Dashboard",
+          "nearbyText": "Dashboard"
+        },
+        {
+          "id": "e11",
+          "selector": "a[href=\"/web/index.php/directory/viewDirectory\"]",
+          "kind": "link",
+          "label": "Directory",
+          "nearbyText": "Directory"
+        },
+        {
+          "id": "e12",
+          "selector": "a[href=\"/web/index.php/maintenance/viewMaintenanceModule\"]",
+          "kind": "link",
+          "label": "Maintenance",
+          "nearbyText": "Maintenance"
+        },
+        {
+          "id": "e13",
+          "selector": "a[href=\"/web/index.php/claim/viewClaimModule\"]",
+          "kind": "link",
+          "label": "Claim",
+          "nearbyText": "Claim"
+        },
+        {
+          "id": "e14",
+          "selector": "a[href=\"/web/index.php/buzz/viewBuzz\"]",
+          "kind": "link",
+          "label": "Buzz",
+          "nearbyText": "Buzz"
+        },
+        {
+          "id": "e15",
+          "selector": "a[href=\"https://orangehrm.com/open-source/upgrade-to-advanced\"]",
+          "kind": "link",
+          "label": "Upgrade",
+          "nearbyText": "Upgrade"
+        },
+        {
+          "id": "e16",
+          "selector": "button:has-text(\"Upgrade\")",
+          "kind": "button",
+          "label": "Upgrade",
+          "nearbyText": "Upgrade",
+          "inputType": "button"
+        },
+        {
+          "id": "e17",
+          "selector": "a[href=\"#\"]",
+          "kind": "link",
+          "label": "Nationalities",
+          "nearbyText": "Nationalities"
+        },
+        {
+          "id": "e20",
+          "selector": "button:has-text(\"Add\")",
+          "kind": "button",
+          "label": "Add",
+          "nearbyText": "Add",
+          "inputType": "button"
+        },
+        {
+          "id": "e85",
+          "selector": "a[href=\"http://www.orangehrm.com\"]",
+          "kind": "link",
+          "label": "OrangeHRM, Inc",
+          "nearbyText": "OrangeHRM OS 5.9© 2005 - 2026 OrangeHRM, Inc. All rights reserved."
+        }
+      ],
+      "resultContainers": [
+        {
+          "selector": "div.oxd-table-body",
+          "preview": "Content CreationMarketing SkillCopywritingMarketing SkillG SuiteProductivity ToolsGoogle AnalyticsMarketing SkillJavaProgramming LanguageJavaScriptProgramming L",
+          "rowCount": 21
+        },
+        {
+          "selector": "ul.oxd-main-menu",
+          "preview": "AdminPIMLeaveTimeRecruitmentMy InfoPerformanceDashboardDirectoryMaintenanceClaimBuzz",
+          "rowCount": 12
+        },
+        {
+          "selector": "div.oxd-table",
+          "preview": "NameDescriptionActionsContent CreationMarketing SkillCopywritingMarketing SkillG SuiteProductivity ToolsGoogle AnalyticsMarketing SkillJavaProgramming LanguageJ",
+          "rowCount": 2
+        }
+      ]
+    },
+    {
+      "id": "s7",
       "url": "https://opensource-demo.orangehrmlive.com/web/index.php/pim/viewEmployeeList",
       "title": "OrangeHRM",
-      "screenshot": "/shots/s2.png",
+      "screenshot": "/shots/s7.png",
       "elements": [
         {
           "id": "e1",
@@ -516,15 +1217,7 @@
           "inputType": "button"
         },
         {
-          "id": "e182",
-          "selector": "button:has-text(\"4\")",
-          "kind": "button",
-          "label": "4",
-          "nearbyText": "4",
-          "inputType": "button"
-        },
-        {
-          "id": "e184",
+          "id": "e183",
           "selector": "a[href=\"http://www.orangehrm.com\"]",
           "kind": "link",
           "label": "OrangeHRM, Inc",
@@ -534,7 +1227,7 @@
       "resultContainers": [
         {
           "selector": "div.oxd-table-body",
-          "preview": "029599N75 4255TlV0312A8DCo 4Ys010Z0468ABC DEFGHIJ039680472ABC DEFGHIJ0396803968ABC DEFGHIJ01715Amelia Brown0360aniket tt735aniket AshokpatilAnup TestEmployeeAnu",
+          "preview": "0394A AA0312A8DCo 4Ys010Z0380aditya b0371Ali KhanAccount AssistantFull-Time PermanentAdministration01715Amelia Brown0360aniket tt557aniket AshokpatilAnup TestEm",
           "rowCount": 50
         },
         {
@@ -550,1027 +1243,8 @@
       ]
     },
     {
-      "id": "s3",
-      "url": "https://opensource-demo.orangehrmlive.com/web/index.php/leave/viewLeaveList",
-      "title": "OrangeHRM",
-      "screenshot": "/shots/s3.png",
-      "elements": [
-        {
-          "id": "e1",
-          "selector": "input[placeholder=\"Search\"]",
-          "kind": "input",
-          "label": "Search",
-          "nearbyText": ""
-        },
-        {
-          "id": "e3",
-          "selector": "a[href=\"/web/index.php/admin/viewAdminModule\"]",
-          "kind": "link",
-          "label": "Admin",
-          "nearbyText": "Admin"
-        },
-        {
-          "id": "e4",
-          "selector": "a[href=\"/web/index.php/pim/viewPimModule\"]",
-          "kind": "link",
-          "label": "PIM",
-          "nearbyText": "PIM"
-        },
-        {
-          "id": "e5",
-          "selector": "a[href=\"/web/index.php/leave/viewLeaveModule\"]",
-          "kind": "link",
-          "label": "Leave",
-          "nearbyText": "Leave"
-        },
-        {
-          "id": "e6",
-          "selector": "a[href=\"/web/index.php/time/viewTimeModule\"]",
-          "kind": "link",
-          "label": "Time",
-          "nearbyText": "Time"
-        },
-        {
-          "id": "e7",
-          "selector": "a[href=\"/web/index.php/recruitment/viewRecruitmentModule\"]",
-          "kind": "link",
-          "label": "Recruitment",
-          "nearbyText": "Recruitment"
-        },
-        {
-          "id": "e8",
-          "selector": "a[href=\"/web/index.php/pim/viewMyDetails\"]",
-          "kind": "link",
-          "label": "My Info",
-          "nearbyText": "My Info"
-        },
-        {
-          "id": "e9",
-          "selector": "a[href=\"/web/index.php/performance/viewPerformanceModule\"]",
-          "kind": "link",
-          "label": "Performance",
-          "nearbyText": "Performance"
-        },
-        {
-          "id": "e10",
-          "selector": "a[href=\"/web/index.php/dashboard/index\"]",
-          "kind": "link",
-          "label": "Dashboard",
-          "nearbyText": "Dashboard"
-        },
-        {
-          "id": "e11",
-          "selector": "a[href=\"/web/index.php/directory/viewDirectory\"]",
-          "kind": "link",
-          "label": "Directory",
-          "nearbyText": "Directory"
-        },
-        {
-          "id": "e12",
-          "selector": "a[href=\"/web/index.php/maintenance/viewMaintenanceModule\"]",
-          "kind": "link",
-          "label": "Maintenance",
-          "nearbyText": "Maintenance"
-        },
-        {
-          "id": "e13",
-          "selector": "a[href=\"/web/index.php/claim/viewClaimModule\"]",
-          "kind": "link",
-          "label": "Claim",
-          "nearbyText": "Claim"
-        },
-        {
-          "id": "e14",
-          "selector": "a[href=\"/web/index.php/buzz/viewBuzz\"]",
-          "kind": "link",
-          "label": "Buzz",
-          "nearbyText": "Buzz"
-        },
-        {
-          "id": "e15",
-          "selector": "a[href=\"https://orangehrm.com/open-source/upgrade-to-advanced\"]",
-          "kind": "link",
-          "label": "Upgrade",
-          "nearbyText": "Upgrade"
-        },
-        {
-          "id": "e16",
-          "selector": "button:has-text(\"Upgrade\")",
-          "kind": "button",
-          "label": "Upgrade",
-          "nearbyText": "Upgrade",
-          "inputType": "button"
-        },
-        {
-          "id": "e17",
-          "selector": "a[href=\"#\"]",
-          "kind": "link",
-          "label": "Apply",
-          "nearbyText": "Apply"
-        },
-        {
-          "id": "e22",
-          "selector": "div.--toggle:has-text(\"From Date\") >> button",
-          "kind": "button",
-          "label": "From Date",
-          "nearbyText": "",
-          "inputType": "button"
-        },
-        {
-          "id": "e23",
-          "selector": "input[placeholder=\"yyyy-dd-mm\"]",
-          "kind": "input",
-          "label": "From Date",
-          "nearbyText": ""
-        },
-        {
-          "id": "e25",
-          "selector": "input[placeholder=\"Type for hints...\"]",
-          "kind": "input",
-          "label": "Employee Name",
-          "nearbyText": ""
-        },
-        {
-          "id": "e26",
-          "selector": "div.oxd-switch-wrapper:has-text(\"Employee Name\") >> input",
-          "kind": "input",
-          "label": "Employee Name",
-          "nearbyText": "",
-          "inputType": "checkbox"
-        },
-        {
-          "id": "e27",
-          "selector": "button:has-text(\"Reset\")",
-          "kind": "button",
-          "label": "Reset",
-          "nearbyText": "* Required Reset Search",
-          "inputType": "reset"
-        },
-        {
-          "id": "e28",
-          "selector": "button:has-text(\"Search\")",
-          "kind": "button",
-          "label": "Search",
-          "nearbyText": "* Required Reset Search",
-          "inputType": "submit"
-        },
-        {
-          "id": "e30",
-          "selector": "a[href=\"http://www.orangehrm.com\"]",
-          "kind": "link",
-          "label": "OrangeHRM, Inc",
-          "nearbyText": "OrangeHRM OS 5.9© 2005 - 2026 OrangeHRM, Inc. All rights reserved."
-        }
-      ],
-      "resultContainers": [
-        {
-          "selector": "ul.oxd-main-menu",
-          "preview": "AdminPIMLeaveTimeRecruitmentMy InfoPerformanceDashboardDirectoryMaintenanceClaimBuzz",
-          "rowCount": 12
-        }
-      ]
-    },
-    {
-      "id": "s4",
-      "url": "https://opensource-demo.orangehrmlive.com/web/index.php/time/viewEmployeeTimesheet",
-      "title": "OrangeHRM",
-      "screenshot": "/shots/s4.png",
-      "elements": [
-        {
-          "id": "e1",
-          "selector": "input[placeholder=\"Search\"]",
-          "kind": "input",
-          "label": "Search",
-          "nearbyText": ""
-        },
-        {
-          "id": "e3",
-          "selector": "a[href=\"/web/index.php/admin/viewAdminModule\"]",
-          "kind": "link",
-          "label": "Admin",
-          "nearbyText": "Admin"
-        },
-        {
-          "id": "e4",
-          "selector": "a[href=\"/web/index.php/pim/viewPimModule\"]",
-          "kind": "link",
-          "label": "PIM",
-          "nearbyText": "PIM"
-        },
-        {
-          "id": "e5",
-          "selector": "a[href=\"/web/index.php/leave/viewLeaveModule\"]",
-          "kind": "link",
-          "label": "Leave",
-          "nearbyText": "Leave"
-        },
-        {
-          "id": "e6",
-          "selector": "a[href=\"/web/index.php/time/viewTimeModule\"]",
-          "kind": "link",
-          "label": "Time",
-          "nearbyText": "Time"
-        },
-        {
-          "id": "e7",
-          "selector": "a[href=\"/web/index.php/recruitment/viewRecruitmentModule\"]",
-          "kind": "link",
-          "label": "Recruitment",
-          "nearbyText": "Recruitment"
-        },
-        {
-          "id": "e8",
-          "selector": "a[href=\"/web/index.php/pim/viewMyDetails\"]",
-          "kind": "link",
-          "label": "My Info",
-          "nearbyText": "My Info"
-        },
-        {
-          "id": "e9",
-          "selector": "a[href=\"/web/index.php/performance/viewPerformanceModule\"]",
-          "kind": "link",
-          "label": "Performance",
-          "nearbyText": "Performance"
-        },
-        {
-          "id": "e10",
-          "selector": "a[href=\"/web/index.php/dashboard/index\"]",
-          "kind": "link",
-          "label": "Dashboard",
-          "nearbyText": "Dashboard"
-        },
-        {
-          "id": "e11",
-          "selector": "a[href=\"/web/index.php/directory/viewDirectory\"]",
-          "kind": "link",
-          "label": "Directory",
-          "nearbyText": "Directory"
-        },
-        {
-          "id": "e12",
-          "selector": "a[href=\"/web/index.php/maintenance/viewMaintenanceModule\"]",
-          "kind": "link",
-          "label": "Maintenance",
-          "nearbyText": "Maintenance"
-        },
-        {
-          "id": "e13",
-          "selector": "a[href=\"/web/index.php/claim/viewClaimModule\"]",
-          "kind": "link",
-          "label": "Claim",
-          "nearbyText": "Claim"
-        },
-        {
-          "id": "e14",
-          "selector": "a[href=\"/web/index.php/buzz/viewBuzz\"]",
-          "kind": "link",
-          "label": "Buzz",
-          "nearbyText": "Buzz"
-        },
-        {
-          "id": "e15",
-          "selector": "a[href=\"https://orangehrm.com/open-source/upgrade-to-advanced\"]",
-          "kind": "link",
-          "label": "Upgrade",
-          "nearbyText": "Upgrade"
-        },
-        {
-          "id": "e16",
-          "selector": "button:has-text(\"Upgrade\")",
-          "kind": "button",
-          "label": "Upgrade",
-          "nearbyText": "Upgrade",
-          "inputType": "button"
-        },
-        {
-          "id": "e18",
-          "selector": "input[placeholder=\"Type for hints...\"]",
-          "kind": "input",
-          "label": "Employee Name",
-          "nearbyText": ""
-        },
-        {
-          "id": "e19",
-          "selector": "button:has-text(\"View\")",
-          "kind": "button",
-          "label": "View",
-          "nearbyText": "* Required View",
-          "inputType": "submit"
-        },
-        {
-          "id": "e23",
-          "selector": "a[href=\"http://www.orangehrm.com\"]",
-          "kind": "link",
-          "label": "OrangeHRM, Inc",
-          "nearbyText": "OrangeHRM OS 5.9© 2005 - 2026 OrangeHRM, Inc. All rights reserved."
-        }
-      ],
-      "resultContainers": [
-        {
-          "selector": "ul.oxd-main-menu",
-          "preview": "AdminPIMLeaveTimeRecruitmentMy InfoPerformanceDashboardDirectoryMaintenanceClaimBuzz",
-          "rowCount": 12
-        },
-        {
-          "selector": "div.oxd-table-body",
-          "preview": "Hugo Ribas Musk2023-16-01 - 2023-22-01 View Hugo Ribas Musk2022-15-08 - 2022-21-08 View Hugo Ribas Musk2020-14-09 - 2020-20-09 View",
-          "rowCount": 3
-        },
-        {
-          "selector": "div.oxd-table",
-          "preview": "Employee NameTimesheet PeriodActionsHugo Ribas Musk2023-16-01 - 2023-22-01 View Hugo Ribas Musk2022-15-08 - 2022-21-08 View Hugo Ribas Musk2020-14-09 - 2020-20-",
-          "rowCount": 2
-        }
-      ]
-    },
-    {
-      "id": "s5",
-      "url": "https://opensource-demo.orangehrmlive.com/web/index.php/recruitment/viewCandidates",
-      "title": "OrangeHRM",
-      "screenshot": "/shots/s5.png",
-      "elements": [
-        {
-          "id": "e1",
-          "selector": "input[placeholder=\"Search\"]",
-          "kind": "input",
-          "label": "Search",
-          "nearbyText": ""
-        },
-        {
-          "id": "e3",
-          "selector": "a[href=\"/web/index.php/admin/viewAdminModule\"]",
-          "kind": "link",
-          "label": "Admin",
-          "nearbyText": "Admin"
-        },
-        {
-          "id": "e4",
-          "selector": "a[href=\"/web/index.php/pim/viewPimModule\"]",
-          "kind": "link",
-          "label": "PIM",
-          "nearbyText": "PIM"
-        },
-        {
-          "id": "e5",
-          "selector": "a[href=\"/web/index.php/leave/viewLeaveModule\"]",
-          "kind": "link",
-          "label": "Leave",
-          "nearbyText": "Leave"
-        },
-        {
-          "id": "e6",
-          "selector": "a[href=\"/web/index.php/time/viewTimeModule\"]",
-          "kind": "link",
-          "label": "Time",
-          "nearbyText": "Time"
-        },
-        {
-          "id": "e7",
-          "selector": "a[href=\"/web/index.php/recruitment/viewRecruitmentModule\"]",
-          "kind": "link",
-          "label": "Recruitment",
-          "nearbyText": "Recruitment"
-        },
-        {
-          "id": "e8",
-          "selector": "a[href=\"/web/index.php/pim/viewMyDetails\"]",
-          "kind": "link",
-          "label": "My Info",
-          "nearbyText": "My Info"
-        },
-        {
-          "id": "e9",
-          "selector": "a[href=\"/web/index.php/performance/viewPerformanceModule\"]",
-          "kind": "link",
-          "label": "Performance",
-          "nearbyText": "Performance"
-        },
-        {
-          "id": "e10",
-          "selector": "a[href=\"/web/index.php/dashboard/index\"]",
-          "kind": "link",
-          "label": "Dashboard",
-          "nearbyText": "Dashboard"
-        },
-        {
-          "id": "e11",
-          "selector": "a[href=\"/web/index.php/directory/viewDirectory\"]",
-          "kind": "link",
-          "label": "Directory",
-          "nearbyText": "Directory"
-        },
-        {
-          "id": "e12",
-          "selector": "a[href=\"/web/index.php/maintenance/viewMaintenanceModule\"]",
-          "kind": "link",
-          "label": "Maintenance",
-          "nearbyText": "Maintenance"
-        },
-        {
-          "id": "e13",
-          "selector": "a[href=\"/web/index.php/claim/viewClaimModule\"]",
-          "kind": "link",
-          "label": "Claim",
-          "nearbyText": "Claim"
-        },
-        {
-          "id": "e14",
-          "selector": "a[href=\"/web/index.php/buzz/viewBuzz\"]",
-          "kind": "link",
-          "label": "Buzz",
-          "nearbyText": "Buzz"
-        },
-        {
-          "id": "e15",
-          "selector": "a[href=\"https://orangehrm.com/open-source/upgrade-to-advanced\"]",
-          "kind": "link",
-          "label": "Upgrade",
-          "nearbyText": "Upgrade"
-        },
-        {
-          "id": "e16",
-          "selector": "button:has-text(\"Upgrade\")",
-          "kind": "button",
-          "label": "Upgrade",
-          "nearbyText": "Upgrade",
-          "inputType": "button"
-        },
-        {
-          "id": "e17",
-          "selector": "a[href=\"#\"]",
-          "kind": "link",
-          "label": "Candidates",
-          "nearbyText": "Candidates"
-        },
-        {
-          "id": "e20",
-          "selector": "div.--toggle:has-text(\"Job Title\") >> button",
-          "kind": "button",
-          "label": "Job Title",
-          "nearbyText": "",
-          "inputType": "button"
-        },
-        {
-          "id": "e21",
-          "selector": "input[placeholder=\"Type for hints...\"]",
-          "kind": "input",
-          "label": "Candidate Name",
-          "nearbyText": ""
-        },
-        {
-          "id": "e22",
-          "selector": "input[placeholder=\"Enter comma seperated words...\"]",
-          "kind": "input",
-          "label": "Keywords",
-          "nearbyText": ""
-        },
-        {
-          "id": "e23",
-          "selector": "input[placeholder=\"From\"]",
-          "kind": "input",
-          "label": "Date of Application",
-          "nearbyText": ""
-        },
-        {
-          "id": "e24",
-          "selector": "input[placeholder=\"To\"]",
-          "kind": "input",
-          "label": "To",
-          "nearbyText": ""
-        },
-        {
-          "id": "e25",
-          "selector": "button:has-text(\"Reset\")",
-          "kind": "button",
-          "label": "Reset",
-          "nearbyText": "Reset Search",
-          "inputType": "reset"
-        },
-        {
-          "id": "e26",
-          "selector": "button:has-text(\"Search\")",
-          "kind": "button",
-          "label": "Search",
-          "nearbyText": "Reset Search",
-          "inputType": "submit"
-        },
-        {
-          "id": "e27",
-          "selector": "button:has-text(\"Add\")",
-          "kind": "button",
-          "label": "Add",
-          "nearbyText": "Add",
-          "inputType": "button"
-        },
-        {
-          "id": "e203",
-          "selector": "button:has-text(\"1\")",
-          "kind": "button",
-          "label": "1",
-          "nearbyText": "1",
-          "inputType": "button"
-        },
-        {
-          "id": "e204",
-          "selector": "button:has-text(\"2\")",
-          "kind": "button",
-          "label": "2",
-          "nearbyText": "2",
-          "inputType": "button"
-        },
-        {
-          "id": "e206",
-          "selector": "a[href=\"http://www.orangehrm.com\"]",
-          "kind": "link",
-          "label": "OrangeHRM, Inc",
-          "nearbyText": "OrangeHRM OS 5.9© 2005 - 2026 OrangeHRM, Inc. All rights reserved."
-        }
-      ],
-      "resultContainers": [
-        {
-          "selector": "div.oxd-table-body",
-          "preview": "Senior QA Leada a a (Deleted)2026-22-08Application InitiatedEmptyInterview1787400577224 Test Candidate (Deleted)2026-22-08CancelInterview1787400626330 Test Cand",
-          "rowCount": 50
-        },
-        {
-          "selector": "ul.oxd-main-menu",
-          "preview": "AdminPIMLeaveTimeRecruitmentMy InfoPerformanceDashboardDirectoryMaintenanceClaimBuzz",
-          "rowCount": 12
-        },
-        {
-          "selector": "div.oxd-table",
-          "preview": "VacancyAscendingDescendingCandidateAscendingDescendingHiring ManagerAscendingDescendingDate of ApplicationAscendingDescendingStatusAscendingDescendingActionsSen",
-          "rowCount": 2
-        }
-      ]
-    },
-    {
-      "id": "s6",
-      "url": "https://opensource-demo.orangehrmlive.com/web/index.php/pim/viewPersonalDetails/empNumber/7",
-      "title": "OrangeHRM",
-      "screenshot": "/shots/s6.png",
-      "elements": [
-        {
-          "id": "e1",
-          "selector": "input[placeholder=\"Search\"]",
-          "kind": "input",
-          "label": "Search",
-          "nearbyText": ""
-        },
-        {
-          "id": "e3",
-          "selector": "a[href=\"/web/index.php/admin/viewAdminModule\"]",
-          "kind": "link",
-          "label": "Admin",
-          "nearbyText": "Admin"
-        },
-        {
-          "id": "e4",
-          "selector": "a[href=\"/web/index.php/pim/viewPimModule\"]",
-          "kind": "link",
-          "label": "PIM",
-          "nearbyText": "PIM"
-        },
-        {
-          "id": "e5",
-          "selector": "a[href=\"/web/index.php/leave/viewLeaveModule\"]",
-          "kind": "link",
-          "label": "Leave",
-          "nearbyText": "Leave"
-        },
-        {
-          "id": "e6",
-          "selector": "a[href=\"/web/index.php/time/viewTimeModule\"]",
-          "kind": "link",
-          "label": "Time",
-          "nearbyText": "Time"
-        },
-        {
-          "id": "e7",
-          "selector": "a[href=\"/web/index.php/recruitment/viewRecruitmentModule\"]",
-          "kind": "link",
-          "label": "Recruitment",
-          "nearbyText": "Recruitment"
-        },
-        {
-          "id": "e8",
-          "selector": "a[href=\"/web/index.php/pim/viewMyDetails\"]",
-          "kind": "link",
-          "label": "My Info",
-          "nearbyText": "My Info"
-        },
-        {
-          "id": "e9",
-          "selector": "a[href=\"/web/index.php/performance/viewPerformanceModule\"]",
-          "kind": "link",
-          "label": "Performance",
-          "nearbyText": "Performance"
-        },
-        {
-          "id": "e10",
-          "selector": "a[href=\"/web/index.php/dashboard/index\"]",
-          "kind": "link",
-          "label": "Dashboard",
-          "nearbyText": "Dashboard"
-        },
-        {
-          "id": "e11",
-          "selector": "a[href=\"/web/index.php/directory/viewDirectory\"]",
-          "kind": "link",
-          "label": "Directory",
-          "nearbyText": "Directory"
-        },
-        {
-          "id": "e12",
-          "selector": "a[href=\"/web/index.php/maintenance/viewMaintenanceModule\"]",
-          "kind": "link",
-          "label": "Maintenance",
-          "nearbyText": "Maintenance"
-        },
-        {
-          "id": "e13",
-          "selector": "a[href=\"/web/index.php/claim/viewClaimModule\"]",
-          "kind": "link",
-          "label": "Claim",
-          "nearbyText": "Claim"
-        },
-        {
-          "id": "e14",
-          "selector": "a[href=\"/web/index.php/buzz/viewBuzz\"]",
-          "kind": "link",
-          "label": "Buzz",
-          "nearbyText": "Buzz"
-        },
-        {
-          "id": "e15",
-          "selector": "a[href=\"https://orangehrm.com/open-source/upgrade-to-advanced\"]",
-          "kind": "link",
-          "label": "Upgrade",
-          "nearbyText": "Upgrade"
-        },
-        {
-          "id": "e16",
-          "selector": "button:has-text(\"Upgrade\")",
-          "kind": "button",
-          "label": "Upgrade",
-          "nearbyText": "Upgrade",
-          "inputType": "button"
-        },
-        {
-          "id": "e18",
-          "selector": "a[href=\"/web/index.php/pim/viewPersonalDetails/empNumber/7\"]",
-          "kind": "link",
-          "label": "Personal Details",
-          "nearbyText": "Personal Details"
-        },
-        {
-          "id": "e19",
-          "selector": "a[href=\"/web/index.php/pim/contactDetails/empNumber/7\"]",
-          "kind": "link",
-          "label": "Contact Details",
-          "nearbyText": "Contact Details"
-        },
-        {
-          "id": "e20",
-          "selector": "a[href=\"/web/index.php/pim/viewEmergencyContacts/empNumber/7\"]",
-          "kind": "link",
-          "label": "Emergency Contacts",
-          "nearbyText": "Emergency Contacts"
-        },
-        {
-          "id": "e21",
-          "selector": "a[href=\"/web/index.php/pim/viewDependents/empNumber/7\"]",
-          "kind": "link",
-          "label": "Dependents",
-          "nearbyText": "Dependents"
-        },
-        {
-          "id": "e22",
-          "selector": "a[href=\"/web/index.php/pim/viewImmigration/empNumber/7\"]",
-          "kind": "link",
-          "label": "Immigration",
-          "nearbyText": "Immigration"
-        },
-        {
-          "id": "e23",
-          "selector": "a[href=\"/web/index.php/pim/viewJobDetails/empNumber/7\"]",
-          "kind": "link",
-          "label": "Job",
-          "nearbyText": "Job"
-        },
-        {
-          "id": "e24",
-          "selector": "a[href=\"/web/index.php/pim/viewSalaryList/empNumber/7\"]",
-          "kind": "link",
-          "label": "Salary",
-          "nearbyText": "Salary"
-        },
-        {
-          "id": "e25",
-          "selector": "a[href=\"/web/index.php/pim/viewReportToDetails/empNumber/7\"]",
-          "kind": "link",
-          "label": "Report-to",
-          "nearbyText": "Report-to"
-        },
-        {
-          "id": "e26",
-          "selector": "a[href=\"/web/index.php/pim/viewQualifications/empNumber/7\"]",
-          "kind": "link",
-          "label": "Qualifications",
-          "nearbyText": "Qualifications"
-        },
-        {
-          "id": "e27",
-          "selector": "a[href=\"/web/index.php/pim/viewMemberships/empNumber/7\"]",
-          "kind": "link",
-          "label": "Memberships",
-          "nearbyText": "Memberships"
-        },
-        {
-          "id": "e28",
-          "selector": "input[name=\"firstName\"]",
-          "kind": "input",
-          "label": "Employee Full Name",
-          "nearbyText": ""
-        },
-        {
-          "id": "e29",
-          "selector": "input[name=\"middleName\"]",
-          "kind": "input",
-          "label": "Employee Full Name",
-          "nearbyText": ""
-        },
-        {
-          "id": "e30",
-          "selector": "input[name=\"lastName\"]",
-          "kind": "input",
-          "label": "Employee Full Name",
-          "nearbyText": ""
-        },
-        {
-          "id": "e31",
-          "selector": "div.oxd-input-group:has-text(\"Employee Id\") >> input",
-          "kind": "input",
-          "label": "Employee Id",
-          "nearbyText": ""
-        },
-        {
-          "id": "e32",
-          "selector": "div.oxd-input-group:has-text(\"Other Id\") >> input",
-          "kind": "input",
-          "label": "Other Id",
-          "nearbyText": ""
-        },
-        {
-          "id": "e33",
-          "selector": "div.oxd-input-group:has-text(\"Driver's License Number\") >> input",
-          "kind": "input",
-          "label": "Driver's License Number",
-          "nearbyText": ""
-        },
-        {
-          "id": "e34",
-          "selector": "input[placeholder=\"yyyy-dd-mm\"]",
-          "kind": "input",
-          "label": "License Expiry Date",
-          "nearbyText": ""
-        },
-        {
-          "id": "e36",
-          "selector": "div.oxd-radio-wrapper:has-text(\"Male\") >> input",
-          "kind": "input",
-          "label": "Male",
-          "nearbyText": "Male",
-          "inputType": "radio"
-        },
-        {
-          "id": "e37",
-          "selector": "div.oxd-radio-wrapper:has-text(\"Female\") >> input",
-          "kind": "input",
-          "label": "Female",
-          "nearbyText": "Female",
-          "inputType": "radio"
-        },
-        {
-          "id": "e38",
-          "selector": "button:has-text(\"Save\")",
-          "kind": "button",
-          "label": "Save",
-          "nearbyText": "* Required Save",
-          "inputType": "submit"
-        },
-        {
-          "id": "e39",
-          "selector": "div.oxd-input-group:has-text(\"Test_Field\") >> input",
-          "kind": "input",
-          "label": "Test_Field",
-          "nearbyText": ""
-        },
-        {
-          "id": "e41",
-          "selector": "button:has-text(\"Add\")",
-          "kind": "button",
-          "label": "Add",
-          "nearbyText": "Attachments Add",
-          "inputType": "button"
-        },
-        {
-          "id": "e47",
-          "selector": "a[href=\"http://www.orangehrm.com\"]",
-          "kind": "link",
-          "label": "OrangeHRM, Inc",
-          "nearbyText": "OrangeHRM OS 5.9© 2005 - 2026 OrangeHRM, Inc. All rights reserved."
-        }
-      ],
-      "resultContainers": [
-        {
-          "selector": "ul.oxd-main-menu",
-          "preview": "AdminPIMLeaveTimeRecruitmentMy InfoPerformanceDashboardDirectoryMaintenanceClaimBuzz",
-          "rowCount": 12
-        },
-        {
-          "selector": "div.oxd-table",
-          "preview": "File NameDescriptionSizeTypeDate AddedAdded ByActionsdemo.jpgtesting132.03 kBimage/jpeg2026-22-08Admin",
-          "rowCount": 2
-        }
-      ]
-    },
-    {
-      "id": "s7",
-      "url": "https://opensource-demo.orangehrmlive.com/web/index.php/performance/searchEvaluatePerformanceReview",
-      "title": "OrangeHRM",
-      "screenshot": "/shots/s7.png",
-      "elements": [
-        {
-          "id": "e1",
-          "selector": "input[placeholder=\"Search\"]",
-          "kind": "input",
-          "label": "Search",
-          "nearbyText": ""
-        },
-        {
-          "id": "e3",
-          "selector": "a[href=\"/web/index.php/admin/viewAdminModule\"]",
-          "kind": "link",
-          "label": "Admin",
-          "nearbyText": "Admin"
-        },
-        {
-          "id": "e4",
-          "selector": "a[href=\"/web/index.php/pim/viewPimModule\"]",
-          "kind": "link",
-          "label": "PIM",
-          "nearbyText": "PIM"
-        },
-        {
-          "id": "e5",
-          "selector": "a[href=\"/web/index.php/leave/viewLeaveModule\"]",
-          "kind": "link",
-          "label": "Leave",
-          "nearbyText": "Leave"
-        },
-        {
-          "id": "e6",
-          "selector": "a[href=\"/web/index.php/time/viewTimeModule\"]",
-          "kind": "link",
-          "label": "Time",
-          "nearbyText": "Time"
-        },
-        {
-          "id": "e7",
-          "selector": "a[href=\"/web/index.php/recruitment/viewRecruitmentModule\"]",
-          "kind": "link",
-          "label": "Recruitment",
-          "nearbyText": "Recruitment"
-        },
-        {
-          "id": "e8",
-          "selector": "a[href=\"/web/index.php/pim/viewMyDetails\"]",
-          "kind": "link",
-          "label": "My Info",
-          "nearbyText": "My Info"
-        },
-        {
-          "id": "e9",
-          "selector": "a[href=\"/web/index.php/performance/viewPerformanceModule\"]",
-          "kind": "link",
-          "label": "Performance",
-          "nearbyText": "Performance"
-        },
-        {
-          "id": "e10",
-          "selector": "a[href=\"/web/index.php/dashboard/index\"]",
-          "kind": "link",
-          "label": "Dashboard",
-          "nearbyText": "Dashboard"
-        },
-        {
-          "id": "e11",
-          "selector": "a[href=\"/web/index.php/directory/viewDirectory\"]",
-          "kind": "link",
-          "label": "Directory",
-          "nearbyText": "Directory"
-        },
-        {
-          "id": "e12",
-          "selector": "a[href=\"/web/index.php/maintenance/viewMaintenanceModule\"]",
-          "kind": "link",
-          "label": "Maintenance",
-          "nearbyText": "Maintenance"
-        },
-        {
-          "id": "e13",
-          "selector": "a[href=\"/web/index.php/claim/viewClaimModule\"]",
-          "kind": "link",
-          "label": "Claim",
-          "nearbyText": "Claim"
-        },
-        {
-          "id": "e14",
-          "selector": "a[href=\"/web/index.php/buzz/viewBuzz\"]",
-          "kind": "link",
-          "label": "Buzz",
-          "nearbyText": "Buzz"
-        },
-        {
-          "id": "e15",
-          "selector": "a[href=\"https://orangehrm.com/open-source/upgrade-to-advanced\"]",
-          "kind": "link",
-          "label": "Upgrade",
-          "nearbyText": "Upgrade"
-        },
-        {
-          "id": "e16",
-          "selector": "button:has-text(\"Upgrade\")",
-          "kind": "button",
-          "label": "Upgrade",
-          "nearbyText": "Upgrade",
-          "inputType": "button"
-        },
-        {
-          "id": "e17",
-          "selector": "a[href=\"#\"]",
-          "kind": "link",
-          "label": "My Trackers",
-          "nearbyText": "My Trackers"
-        },
-        {
-          "id": "e20",
-          "selector": "div.--toggle:has-text(\"Employee Name\") >> button",
-          "kind": "button",
-          "label": "Employee Name",
-          "nearbyText": "",
-          "inputType": "button"
-        },
-        {
-          "id": "e21",
-          "selector": "input[placeholder=\"Type for hints...\"]",
-          "kind": "input",
-          "label": "Employee Name",
-          "nearbyText": ""
-        },
-        {
-          "id": "e22",
-          "selector": "input[placeholder=\"yyyy-dd-mm\"]",
-          "kind": "input",
-          "label": "From Date",
-          "nearbyText": ""
-        },
-        {
-          "id": "e24",
-          "selector": "button:has-text(\"Reset\")",
-          "kind": "button",
-          "label": "Reset",
-          "nearbyText": "Reset Search",
-          "inputType": "reset"
-        },
-        {
-          "id": "e25",
-          "selector": "button:has-text(\"Search\")",
-          "kind": "button",
-          "label": "Search",
-          "nearbyText": "Reset Search",
-          "inputType": "submit"
-        },
-        {
-          "id": "e26",
-          "selector": "a[href=\"http://www.orangehrm.com\"]",
-          "kind": "link",
-          "label": "OrangeHRM, Inc",
-          "nearbyText": "OrangeHRM OS 5.9© 2005 - 2026 OrangeHRM, Inc. All rights reserved."
-        }
-      ],
-      "resultContainers": [
-        {
-          "selector": "ul.oxd-main-menu",
-          "preview": "AdminPIMLeaveTimeRecruitmentMy InfoPerformanceDashboardDirectoryMaintenanceClaimBuzz",
-          "rowCount": 12
-        }
-      ]
-    },
-    {
       "id": "s8",
-      "url": "https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index",
+      "url": "https://opensource-demo.orangehrmlive.com/web/index.php/directory/viewDirectory",
       "title": "OrangeHRM",
       "screenshot": "/shots/s8.png",
       "elements": [
@@ -1681,7 +1355,38 @@
           "inputType": "button"
         },
         {
-          "id": "e27",
+          "id": "e18",
+          "selector": "div.--toggle:has-text(\"Employee Name\") >> button",
+          "kind": "button",
+          "label": "Employee Name",
+          "nearbyText": "",
+          "inputType": "button"
+        },
+        {
+          "id": "e19",
+          "selector": "input[placeholder=\"Type for hints...\"]",
+          "kind": "input",
+          "label": "Employee Name",
+          "nearbyText": ""
+        },
+        {
+          "id": "e20",
+          "selector": "button:has-text(\"Reset\")",
+          "kind": "button",
+          "label": "Reset",
+          "nearbyText": "Reset Search",
+          "inputType": "reset"
+        },
+        {
+          "id": "e21",
+          "selector": "button:has-text(\"Search\")",
+          "kind": "button",
+          "label": "Search",
+          "nearbyText": "Reset Search",
+          "inputType": "submit"
+        },
+        {
+          "id": "e22",
           "selector": "a[href=\"http://www.orangehrm.com\"]",
           "kind": "link",
           "label": "OrangeHRM, Inc",
@@ -1695,15 +1400,15 @@
           "rowCount": 12
         },
         {
-          "selector": "ul.oxd-chart-legend",
-          "preview": "EngineeringHuman ResourcesAdministrationClient ServicesUnassigned",
-          "rowCount": 5
+          "selector": "div.orangehrm-directory-card-body",
+          "preview": "AdministrationNew York Sales Office",
+          "rowCount": 2
         }
       ]
     },
     {
       "id": "s9",
-      "url": "https://opensource-demo.orangehrmlive.com/web/index.php/directory/viewDirectory",
+      "url": "https://opensource-demo.orangehrmlive.com/web/index.php/admin/viewSystemUsers",
       "title": "OrangeHRM",
       "screenshot": "/shots/s9.png",
       "elements": [
@@ -1814,30 +1519,44 @@
           "inputType": "button"
         },
         {
-          "id": "e18",
-          "selector": "div.--toggle:has-text(\"Employee Name\") >> button",
+          "id": "e17",
+          "selector": "a[href=\"#\"]",
+          "kind": "link",
+          "label": "Nationalities",
+          "nearbyText": "Nationalities"
+        },
+        {
+          "id": "e20",
+          "selector": "div.--toggle:has-text(\"Username\") >> button",
           "kind": "button",
-          "label": "Employee Name",
+          "label": "Username",
           "nearbyText": "",
           "inputType": "button"
         },
         {
-          "id": "e19",
+          "id": "e21",
+          "selector": "div.oxd-input-group:has-text(\"Username\") >> input",
+          "kind": "input",
+          "label": "Username",
+          "nearbyText": ""
+        },
+        {
+          "id": "e22",
           "selector": "input[placeholder=\"Type for hints...\"]",
           "kind": "input",
           "label": "Employee Name",
           "nearbyText": ""
         },
         {
-          "id": "e20",
+          "id": "e23",
           "selector": "button:has-text(\"Reset\")",
           "kind": "button",
           "label": "Reset",
           "nearbyText": "Reset Search",
-          "inputType": "reset"
+          "inputType": "button"
         },
         {
-          "id": "e21",
+          "id": "e24",
           "selector": "button:has-text(\"Search\")",
           "kind": "button",
           "label": "Search",
@@ -1845,7 +1564,15 @@
           "inputType": "submit"
         },
         {
-          "id": "e22",
+          "id": "e25",
+          "selector": "button:has-text(\"Add\")",
+          "kind": "button",
+          "label": "Add",
+          "nearbyText": "Add",
+          "inputType": "button"
+        },
+        {
+          "id": "e39",
           "selector": "a[href=\"http://www.orangehrm.com\"]",
           "kind": "link",
           "label": "OrangeHRM, Inc",
@@ -1857,6 +1584,16 @@
           "selector": "ul.oxd-main-menu",
           "preview": "AdminPIMLeaveTimeRecruitmentMy InfoPerformanceDashboardDirectoryMaintenanceClaimBuzz",
           "rowCount": 12
+        },
+        {
+          "selector": "div.oxd-table-body",
+          "preview": "AdminAdminSpooder Test ManEnabledFMLNameESSQwerty LNameEnabledFMLName1ESSFName LNameEnabledJobinsam@6742ESSJobin SamEnabled",
+          "rowCount": 4
+        },
+        {
+          "selector": "div.oxd-table",
+          "preview": "UsernameAscendingDescendingUser RoleAscendingDescendingEmployee NameAscendingDescendingStatusAscendingDescendingActionsAdminAdminSpooder Test ManEnabledFMLNameE",
+          "rowCount": 2
         }
       ]
     }

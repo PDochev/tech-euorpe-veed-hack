@@ -64,100 +64,6 @@
     "semantic": "nav"
   },
   {
-    "elementId": "s1:e1",
-    "semantic": "search_input"
-  },
-  {
-    "elementId": "s1:e3",
-    "semantic": "nav"
-  },
-  {
-    "elementId": "s1:e4",
-    "semantic": "nav"
-  },
-  {
-    "elementId": "s1:e5",
-    "semantic": "nav"
-  },
-  {
-    "elementId": "s1:e6",
-    "semantic": "nav"
-  },
-  {
-    "elementId": "s1:e7",
-    "semantic": "nav"
-  },
-  {
-    "elementId": "s1:e8",
-    "semantic": "nav"
-  },
-  {
-    "elementId": "s1:e9",
-    "semantic": "nav"
-  },
-  {
-    "elementId": "s1:e10",
-    "semantic": "nav"
-  },
-  {
-    "elementId": "s1:e11",
-    "semantic": "nav"
-  },
-  {
-    "elementId": "s1:e12",
-    "semantic": "nav"
-  },
-  {
-    "elementId": "s1:e13",
-    "semantic": "nav"
-  },
-  {
-    "elementId": "s1:e14",
-    "semantic": "nav"
-  },
-  {
-    "elementId": "s1:e15",
-    "semantic": "nav"
-  },
-  {
-    "elementId": "s1:e16",
-    "semantic": "other"
-  },
-  {
-    "elementId": "s1:e17",
-    "semantic": "nav"
-  },
-  {
-    "elementId": "s1:e20",
-    "semantic": "other"
-  },
-  {
-    "elementId": "s1:e21",
-    "semantic": "search_input",
-    "entity": "person_name"
-  },
-  {
-    "elementId": "s1:e22",
-    "semantic": "search_input",
-    "entity": "person_name"
-  },
-  {
-    "elementId": "s1:e23",
-    "semantic": "other"
-  },
-  {
-    "elementId": "s1:e24",
-    "semantic": "submit"
-  },
-  {
-    "elementId": "s1:e25",
-    "semantic": "create"
-  },
-  {
-    "elementId": "s1:e66",
-    "semantic": "nav"
-  },
-  {
     "elementId": "s2:e1",
     "semantic": "search_input"
   },
@@ -222,8 +128,13 @@
     "semantic": "nav"
   },
   {
-    "elementId": "s2:e21",
+    "elementId": "s2:e20",
     "semantic": "other"
+  },
+  {
+    "elementId": "s2:e21",
+    "semantic": "search_input",
+    "entity": "person_name"
   },
   {
     "elementId": "s2:e22",
@@ -232,39 +143,18 @@
   },
   {
     "elementId": "s2:e23",
-    "semantic": "search_input",
-    "entity": "identifier"
-  },
-  {
-    "elementId": "s2:e25",
     "semantic": "other"
   },
   {
-    "elementId": "s2:e26",
+    "elementId": "s2:e24",
     "semantic": "submit"
   },
   {
-    "elementId": "s2:e27",
+    "elementId": "s2:e25",
     "semantic": "create"
   },
   {
-    "elementId": "s2:e179",
-    "semantic": "pagination"
-  },
-  {
-    "elementId": "s2:e180",
-    "semantic": "pagination"
-  },
-  {
-    "elementId": "s2:e181",
-    "semantic": "pagination"
-  },
-  {
-    "elementId": "s2:e182",
-    "semantic": "pagination"
-  },
-  {
-    "elementId": "s2:e184",
+    "elementId": "s2:e39",
     "semantic": "nav"
   },
   {
@@ -332,34 +222,11 @@
     "semantic": "nav"
   },
   {
-    "elementId": "s3:e22",
-    "semantic": "other"
+    "elementId": "s3:e20",
+    "semantic": "create"
   },
   {
-    "elementId": "s3:e23",
-    "semantic": "search_input",
-    "entity": "date"
-  },
-  {
-    "elementId": "s3:e25",
-    "semantic": "search_input",
-    "entity": "person_name"
-  },
-  {
-    "elementId": "s3:e26",
-    "semantic": "filter",
-    "entity": "person_name"
-  },
-  {
-    "elementId": "s3:e27",
-    "semantic": "other"
-  },
-  {
-    "elementId": "s3:e28",
-    "semantic": "submit"
-  },
-  {
-    "elementId": "s3:e30",
+    "elementId": "s3:e106",
     "semantic": "nav"
   },
   {
@@ -423,16 +290,15 @@
     "semantic": "other"
   },
   {
-    "elementId": "s4:e18",
-    "semantic": "search_input",
-    "entity": "person_name"
+    "elementId": "s4:e17",
+    "semantic": "nav"
   },
   {
-    "elementId": "s4:e19",
-    "semantic": "other"
+    "elementId": "s4:e20",
+    "semantic": "create"
   },
   {
-    "elementId": "s4:e23",
+    "elementId": "s4:e37",
     "semantic": "nav"
   },
   {
@@ -501,49 +367,10 @@
   },
   {
     "elementId": "s5:e20",
-    "semantic": "other"
-  },
-  {
-    "elementId": "s5:e21",
-    "semantic": "search_input",
-    "entity": "date"
-  },
-  {
-    "elementId": "s5:e22",
-    "semantic": "search_input"
-  },
-  {
-    "elementId": "s5:e23",
-    "semantic": "search_input",
-    "entity": "date"
-  },
-  {
-    "elementId": "s5:e24",
-    "semantic": "search_input",
-    "entity": "date"
+    "semantic": "filter"
   },
   {
     "elementId": "s5:e25",
-    "semantic": "other"
-  },
-  {
-    "elementId": "s5:e26",
-    "semantic": "submit"
-  },
-  {
-    "elementId": "s5:e27",
-    "semantic": "create"
-  },
-  {
-    "elementId": "s5:e203",
-    "semantic": "pagination"
-  },
-  {
-    "elementId": "s5:e204",
-    "semantic": "pagination"
-  },
-  {
-    "elementId": "s5:e206",
     "semantic": "nav"
   },
   {
@@ -607,102 +434,15 @@
     "semantic": "other"
   },
   {
-    "elementId": "s6:e18",
-    "semantic": "nav"
-  },
-  {
-    "elementId": "s6:e19",
+    "elementId": "s6:e17",
     "semantic": "nav"
   },
   {
     "elementId": "s6:e20",
-    "semantic": "nav"
-  },
-  {
-    "elementId": "s6:e21",
-    "semantic": "nav"
-  },
-  {
-    "elementId": "s6:e22",
-    "semantic": "nav"
-  },
-  {
-    "elementId": "s6:e23",
-    "semantic": "nav"
-  },
-  {
-    "elementId": "s6:e24",
-    "semantic": "nav"
-  },
-  {
-    "elementId": "s6:e25",
-    "semantic": "nav"
-  },
-  {
-    "elementId": "s6:e26",
-    "semantic": "nav"
-  },
-  {
-    "elementId": "s6:e27",
-    "semantic": "nav"
-  },
-  {
-    "elementId": "s6:e28",
-    "semantic": "search_input",
-    "entity": "person_name"
-  },
-  {
-    "elementId": "s6:e29",
-    "semantic": "search_input",
-    "entity": "person_name"
-  },
-  {
-    "elementId": "s6:e30",
-    "semantic": "search_input",
-    "entity": "person_name"
-  },
-  {
-    "elementId": "s6:e31",
-    "semantic": "search_input",
-    "entity": "identifier"
-  },
-  {
-    "elementId": "s6:e32",
-    "semantic": "search_input",
-    "entity": "identifier"
-  },
-  {
-    "elementId": "s6:e33",
-    "semantic": "search_input",
-    "entity": "identifier"
-  },
-  {
-    "elementId": "s6:e34",
-    "semantic": "search_input",
-    "entity": "date"
-  },
-  {
-    "elementId": "s6:e36",
-    "semantic": "filter"
-  },
-  {
-    "elementId": "s6:e37",
-    "semantic": "filter"
-  },
-  {
-    "elementId": "s6:e38",
-    "semantic": "submit"
-  },
-  {
-    "elementId": "s6:e39",
-    "semantic": "search_input"
-  },
-  {
-    "elementId": "s6:e41",
     "semantic": "create"
   },
   {
-    "elementId": "s6:e47",
+    "elementId": "s6:e85",
     "semantic": "nav"
   },
   {
@@ -770,29 +510,45 @@
     "semantic": "nav"
   },
   {
-    "elementId": "s7:e20",
-    "semantic": "other"
-  },
-  {
     "elementId": "s7:e21",
-    "semantic": "search_input",
-    "entity": "person_name"
+    "semantic": "other"
   },
   {
     "elementId": "s7:e22",
     "semantic": "search_input",
-    "entity": "date"
+    "entity": "person_name"
   },
   {
-    "elementId": "s7:e24",
-    "semantic": "other"
+    "elementId": "s7:e23",
+    "semantic": "search_input",
+    "entity": "identifier"
   },
   {
     "elementId": "s7:e25",
-    "semantic": "submit"
+    "semantic": "other"
   },
   {
     "elementId": "s7:e26",
+    "semantic": "submit"
+  },
+  {
+    "elementId": "s7:e27",
+    "semantic": "create"
+  },
+  {
+    "elementId": "s7:e179",
+    "semantic": "pagination"
+  },
+  {
+    "elementId": "s7:e180",
+    "semantic": "pagination"
+  },
+  {
+    "elementId": "s7:e181",
+    "semantic": "pagination"
+  },
+  {
+    "elementId": "s7:e183",
     "semantic": "nav"
   },
   {
@@ -856,7 +612,24 @@
     "semantic": "other"
   },
   {
-    "elementId": "s8:e27",
+    "elementId": "s8:e18",
+    "semantic": "other"
+  },
+  {
+    "elementId": "s8:e19",
+    "semantic": "search_input",
+    "entity": "person_name"
+  },
+  {
+    "elementId": "s8:e20",
+    "semantic": "other"
+  },
+  {
+    "elementId": "s8:e21",
+    "semantic": "submit"
+  },
+  {
+    "elementId": "s8:e22",
     "semantic": "nav"
   },
   {
@@ -920,13 +693,8 @@
     "semantic": "other"
   },
   {
-    "elementId": "s9:e18",
-    "semantic": "other"
-  },
-  {
-    "elementId": "s9:e19",
-    "semantic": "search_input",
-    "entity": "person_name"
+    "elementId": "s9:e17",
+    "semantic": "nav"
   },
   {
     "elementId": "s9:e20",
@@ -934,10 +702,28 @@
   },
   {
     "elementId": "s9:e21",
-    "semantic": "submit"
+    "semantic": "search_input",
+    "entity": "person_name"
   },
   {
     "elementId": "s9:e22",
+    "semantic": "search_input",
+    "entity": "person_name"
+  },
+  {
+    "elementId": "s9:e23",
+    "semantic": "other"
+  },
+  {
+    "elementId": "s9:e24",
+    "semantic": "submit"
+  },
+  {
+    "elementId": "s9:e25",
+    "semantic": "create"
+  },
+  {
+    "elementId": "s9:e39",
     "semantic": "nav"
   }
 ]

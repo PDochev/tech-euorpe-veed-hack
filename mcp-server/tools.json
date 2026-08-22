@@ -1,15 +1,15 @@
 {
-  "target": "https://www.awwwards.com/",
+  "target": "https://opensource-demo.orangehrmlive.com",
   "tools": [
     {
-      "name": "search_nominees",
-      "description": "Search Awwwards nominated websites and return matching nominee cards.",
+      "name": "search_navigation_menu",
+      "description": "Find matching OrangeHRM modules in the left navigation menu.",
       "inputSchema": {
         "type": "object",
         "properties": {
           "query": {
             "type": "string",
-            "description": "Website, studio, category, technology, or keyword to search for among nominees."
+            "description": "Module name or keyword to filter the navigation menu by."
           }
         },
         "required": []
@@ -17,40 +17,40 @@
       "recipe": [
         {
           "action": "goto",
-          "value": "https://www.awwwards.com/websites/nominees/"
-        },
-        {
-          "action": "fill",
-          "selector": "input[placeholder=\"Search by Websites\"]",
-          "arg": "query"
-        },
-        {
-          "action": "click",
-          "selector": "button[aria-label=\"Search\"]"
+          "value": "https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index"
         },
         {
           "action": "wait",
           "ms": 2000
         },
         {
+          "action": "fill",
+          "selector": "input[placeholder=\"Search\"]",
+          "arg": "query"
+        },
+        {
+          "action": "wait",
+          "ms": 500
+        },
+        {
           "action": "read",
-          "selector": "ul.grid-cards"
+          "selector": "ul.oxd-main-menu"
         }
       ],
-      "readSelector": "ul.grid-cards",
+      "readSelector": "ul.oxd-main-menu",
       "derivedFrom": [
-        "s1"
+        "s0"
       ]
     },
     {
-      "name": "search_sites_of_the_day",
-      "description": "Search Awwwards Sites of the Day and return matching awarded website cards.",
+      "name": "search_system_users",
+      "description": "Search system user accounts by username and return matching user rows.",
       "inputSchema": {
         "type": "object",
         "properties": {
-          "query": {
+          "username": {
             "type": "string",
-            "description": "Website, creator, studio, category, technology, or keyword to search for among Sites of the Day."
+            "description": "Username to search for."
           }
         },
         "required": []
@@ -58,16 +58,20 @@
       "recipe": [
         {
           "action": "goto",
-          "value": "https://www.awwwards.com/websites/sites_of_the_day/"
+          "value": "https://opensource-demo.orangehrmlive.com/web/index.php/admin/viewSystemUsers"
+        },
+        {
+          "action": "wait",
+          "ms": 2000
         },
         {
           "action": "fill",
-          "selector": "input[placeholder=\"Search by Websites\"]",
-          "arg": "query"
+          "selector": "div.oxd-input-group:has-text(\"Username\") >> input",
+          "arg": "username"
         },
         {
           "action": "click",
-          "selector": "button[aria-label=\"Search\"]"
+          "selector": "button:has-text(\"Search\")"
         },
         {
           "action": "wait",
@@ -75,23 +79,24 @@
         },
         {
           "action": "read",
-          "selector": "ul.grid-cards"
+          "selector": "div.oxd-table-body"
         }
       ],
-      "readSelector": "ul.grid-cards",
+      "readSelector": "div.oxd-table-body",
       "derivedFrom": [
-        "s2"
+        "s2",
+        "s9"
       ]
     },
     {
-      "name": "search_directory",
-      "description": "Search the Awwwards professional directory and return matching agency, studio, and freelancer cards.",
+      "name": "search_employees_by_id",
+      "description": "Search the PIM employee list by employee ID and return matching employee records.",
       "inputSchema": {
         "type": "object",
         "properties": {
-          "query": {
+          "employee_id": {
             "type": "string",
-            "description": "Professional, agency, studio, country, service, or keyword to search for in the directory."
+            "description": "Employee ID to search for."
           }
         },
         "required": []
@@ -99,16 +104,20 @@
       "recipe": [
         {
           "action": "goto",
-          "value": "https://www.awwwards.com/directory/"
+          "value": "https://opensource-demo.orangehrmlive.com/web/index.php/pim/viewEmployeeList"
+        },
+        {
+          "action": "wait",
+          "ms": 2000
         },
         {
           "action": "fill",
-          "selector": "input[placeholder=\"Search by Directory\"]",
-          "arg": "query"
+          "selector": "div.oxd-input-group:has-text(\"Employee Id\") >> input",
+          "arg": "employee_id"
         },
         {
           "action": "click",
-          "selector": "button[aria-label=\"Search\"]"
+          "selector": "button:has-text(\"Search\")"
         },
         {
           "action": "wait",
@@ -116,40 +125,98 @@
         },
         {
           "action": "read",
-          "selector": "ul.grid-cards"
+          "selector": "div.oxd-table-body"
         }
       ],
-      "readSelector": "ul.grid-cards",
+      "readSelector": "div.oxd-table-body",
+      "derivedFrom": [
+        "s7"
+      ]
+    },
+    {
+      "name": "search_directory_by_employee_name",
+      "description": "Search the employee directory by name and return matching directory cards.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "employee_name": {
+            "type": "string",
+            "description": "Employee name to search for."
+          }
+        },
+        "required": []
+      },
+      "recipe": [
+        {
+          "action": "goto",
+          "value": "https://opensource-demo.orangehrmlive.com/web/index.php/directory/viewDirectory"
+        },
+        {
+          "action": "wait",
+          "ms": 2000
+        },
+        {
+          "action": "fill",
+          "selector": "input[placeholder=\"Type for hints...\"]",
+          "arg": "employee_name"
+        },
+        {
+          "action": "click",
+          "selector": "button:has-text(\"Search\")"
+        },
+        {
+          "action": "wait",
+          "ms": 2000
+        },
+        {
+          "action": "read",
+          "selector": "div.orangehrm-directory-card-body"
+        }
+      ],
+      "readSelector": "div.orangehrm-directory-card-body",
+      "derivedFrom": [
+        "s8"
+      ]
+    },
+    {
+      "name": "list_job_titles",
+      "description": "List all configured job titles and job descriptions.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      },
+      "recipe": [
+        {
+          "action": "goto",
+          "value": "https://opensource-demo.orangehrmlive.com/web/index.php/admin/viewJobTitleList"
+        },
+        {
+          "action": "wait",
+          "ms": 2000
+        },
+        {
+          "action": "read",
+          "selector": "div.oxd-table-body"
+        }
+      ],
+      "readSelector": "div.oxd-table-body",
       "derivedFrom": [
         "s3"
       ]
     },
     {
-      "name": "search_collections",
-      "description": "Search Awwwards inspiration collections and return matching collection cards.",
+      "name": "list_pay_grades",
+      "description": "List configured pay grades and their currencies.",
       "inputSchema": {
         "type": "object",
-        "properties": {
-          "query": {
-            "type": "string",
-            "description": "Collection topic, visual style, design pattern, or keyword to search for."
-          }
-        },
+        "properties": {},
         "required": []
       },
       "recipe": [
         {
           "action": "goto",
-          "value": "https://www.awwwards.com/collections/"
-        },
-        {
-          "action": "fill",
-          "selector": "input[placeholder=\"Search by Collections\"]",
-          "arg": "query"
-        },
-        {
-          "action": "click",
-          "selector": "button[aria-label=\"Search\"]"
+          "value": "https://opensource-demo.orangehrmlive.com/web/index.php/admin/viewPayGrades"
         },
         {
           "action": "wait",
@@ -157,40 +224,26 @@
         },
         {
           "action": "read",
-          "selector": "ul.grid-cards"
+          "selector": "div.oxd-table-body"
         }
       ],
-      "readSelector": "ul.grid-cards",
+      "readSelector": "div.oxd-table-body",
       "derivedFrom": [
         "s4"
       ]
     },
     {
-      "name": "search_academy_courses",
-      "description": "Search Awwwards Academy courses and return matching course cards.",
+      "name": "list_skills",
+      "description": "List configured skills and descriptions from the qualifications setup.",
       "inputSchema": {
         "type": "object",
-        "properties": {
-          "query": {
-            "type": "string",
-            "description": "Course topic, tool, skill, instructor, or keyword to search for in Academy courses."
-          }
-        },
+        "properties": {},
         "required": []
       },
       "recipe": [
         {
           "action": "goto",
-          "value": "https://www.awwwards.com/academy/"
-        },
-        {
-          "action": "fill",
-          "selector": "input[placeholder=\"Search by Academy courses\"]",
-          "arg": "query"
-        },
-        {
-          "action": "click",
-          "selector": "button[aria-label=\"Search\"]"
+          "value": "https://opensource-demo.orangehrmlive.com/web/index.php/admin/viewSkills"
         },
         {
           "action": "wait",
@@ -198,94 +251,12 @@
         },
         {
           "action": "read",
-          "selector": "ul.grid-academy"
+          "selector": "div.oxd-table-body"
         }
       ],
-      "readSelector": "ul.grid-academy",
-      "derivedFrom": [
-        "s5"
-      ]
-    },
-    {
-      "name": "search_blog",
-      "description": "Search the Awwwards blog and return matching web design article cards.",
-      "inputSchema": {
-        "type": "object",
-        "properties": {
-          "query": {
-            "type": "string",
-            "description": "Article title, author, topic, category, trend, or keyword to search for on the blog."
-          }
-        },
-        "required": []
-      },
-      "recipe": [
-        {
-          "action": "goto",
-          "value": "https://www.awwwards.com/blog/"
-        },
-        {
-          "action": "fill",
-          "selector": "input[placeholder=\"Search by Blog\"]",
-          "arg": "query"
-        },
-        {
-          "action": "click",
-          "selector": "button[aria-label=\"Search\"]"
-        },
-        {
-          "action": "wait",
-          "ms": 2000
-        },
-        {
-          "action": "read",
-          "selector": "ul.grid-blog"
-        }
-      ],
-      "readSelector": "ul.grid-blog",
+      "readSelector": "div.oxd-table-body",
       "derivedFrom": [
         "s6"
-      ]
-    },
-    {
-      "name": "search_jobs",
-      "description": "Search Awwwards job listings and return matching web design and development opportunities.",
-      "inputSchema": {
-        "type": "object",
-        "properties": {
-          "job_title": {
-            "type": "string",
-            "description": "Job title, role, company, location, skill, or keyword to search for in job listings."
-          }
-        },
-        "required": []
-      },
-      "recipe": [
-        {
-          "action": "goto",
-          "value": "https://www.awwwards.com/jobs/"
-        },
-        {
-          "action": "fill",
-          "selector": "input[placeholder=\"Search by Jobs\"]",
-          "arg": "job_title"
-        },
-        {
-          "action": "click",
-          "selector": "button[aria-label=\"Search\"]"
-        },
-        {
-          "action": "wait",
-          "ms": 2000
-        },
-        {
-          "action": "read",
-          "selector": "ul.grid-cards"
-        }
-      ],
-      "readSelector": "ul.grid-cards",
-      "derivedFrom": [
-        "s7"
       ]
     }
   ]

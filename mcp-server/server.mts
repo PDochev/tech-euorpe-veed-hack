@@ -26,12 +26,12 @@ const manifest = JSON.parse(await readFile(join(here, "tools.json"), "utf8")) as
 };
 
 const creds = {
-  username: process.env.PORTICO_USERNAME ?? "",
-  password: process.env.PORTICO_PASSWORD ?? "",
+  username: process.env.PORTICO_USERNAME ?? "Admin",
+  password: process.env.PORTICO_PASSWORD ?? "admin123",
 };
 
 const server = new Server(
-  { name: "portico-www-awwwards-com", version: "1.0.0" },
+  { name: "portico-opensource-demo-orangehrmlive-com", version: "1.0.0" },
   { capabilities: { tools: {} } },
 );
 

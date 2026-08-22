@@ -1,6 +1,6 @@
 {
   "mcpServers": {
-    "portico-www-awwwards-com": {
+    "portico-opensource-demo-orangehrmlive-com": {
       "command": "npx",
       "args": [
         "tsx",
