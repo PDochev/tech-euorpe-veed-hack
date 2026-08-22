@@ -8,14 +8,22 @@
 import { compile } from "../app/_lib/pipeline";
 import { isReplay } from "../app/_lib/cache";
 
-const TARGET = process.env.TARGET ?? "https://opensource-demo.orangehrmlive.com";
+const DEFAULT_TARGET = "https://opensource-demo.orangehrmlive.com";
+const TARGET = process.env.TARGET ?? DEFAULT_TARGET;
+
+// The OrangeHRM sandbox credentials are a convenience default. Any other target
+// takes its credentials from the environment, and empty means "no login wall".
+const creds = {
+  username: process.env.PORTICO_USERNAME ?? (TARGET === DEFAULT_TARGET ? "Admin" : ""),
+  password: process.env.PORTICO_PASSWORD ?? (TARGET === DEFAULT_TARGET ? "admin123" : ""),
+};
 
 async function main() {
   console.log(`${isReplay() ? "Replaying" : "Compiling"} ${TARGET}\n`);
 
   for await (const event of compile({
     target: TARGET,
-    creds: { username: "Admin", password: "admin123" },
+    creds,
   })) {
     if (event.type === "stage:start") console.log(`[${event.stage}] ${event.label}`);
     else if (event.type === "stage:log") console.log(`  · ${event.message}`);

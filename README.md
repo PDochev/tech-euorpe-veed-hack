@@ -3,9 +3,10 @@
 **Compiles a web app that has no API into an MCP server.**
 
 Point Portico at a URL (abd login credentials if needed). It explores the app, works out
-what each control does, and writes a standalone MCP server with typed tools —
-`search_system_users(username)` — that any agent can call. Discovery is agentic and happens once.
-Execution is a compiled Playwright recipe with no model in the loop.
+what each control does, and writes a standalone MCP server with typed tools that any agent can call.
+
+- Discovery is agentic and happens once.
+- Execution is a compiled Playwright recipe with no model in the loop.
 
 ---
 
@@ -14,10 +15,10 @@ Execution is a compiled Playwright recipe with no model in the loop.
 Most software in the world has no API. Internal admin panels, council portals, twenty-year-old HR
 systems: the data is right there on screen and completely unreachable by an agent.
 
-Today an agent has two options, and both are bad. It can go without — the task simply cannot be
-automated. Or it can burn a computer-use session on _every single call_: a fresh agent opens a
-browser, squints at the page, clicks around, and costs seconds and cents to answer "what is Linda
-Anderson's employee ID?" Ask the same question twice and you pay twice.
+Today there are two options, and both are bad. Either the task goes unautomated, or the agent burns
+a computer-use session on _every single call_: it opens a browser, squints at the page, and clicks
+around, spending seconds and cents to answer "what is Linda Anderson's employee ID?" Ask the same
+question twice and you pay twice.
 
 Portico makes it a compile step. You pay an agent **once** to understand the app, and from then on
 the same question is one typed MCP tool call — a page load and three DOM actions, no model, no
@@ -45,7 +46,7 @@ server (`mcp-server/server.mts`) contains no LLM calls whatsoever — grep it an
 
 **Video:** [2-minute walkthrough](https://www.loom.com/share/0fb52888f1dd4192bfedf354c985cc7b)
 
-The walkthrough below is a real run against the [OrangeHRM public
+The walkthrough above is a real run against the [OrangeHRM public
 demo](https://opensource-demo.orangehrmlive.com) (`Admin` / `admin123`) — their hosted sandbox of
 OrangeHRM OS, a real HR product with no public API. From one URL and a password, Portico compiles
 typed tools against the live screens (users, employees, directory, job titles, pay grades, skills).
@@ -57,6 +58,7 @@ Verified end to end:
 
 ```
 $ npx tsx scripts/run-tool.ts search_system_users username=Admin
+
 Calling search_system_users({"username":"Admin"})
 
 --- returned ---
@@ -98,8 +100,9 @@ Playwright.
 
 The split here is the most important design decision in the project. h's `web-surfer-flash` agent
 logs in and _looks at_ the app, returning the URLs of the screens where records actually live — via
-a Zod `answerSchema`, so the answer is structured, not prose. It found 8, including **Performance
-Reviews** and **Job Titles**, which the blind link crawl never reached.
+a Zod `answerSchema`, so the answer is structured, not prose. It found 8, including **Job Titles**,
+**Pay Grades**, **Organization Structure** and **Skills** — four Admin screens the blind link crawl
+never reached.
 
 h is never asked for a selector. Prose cannot be replayed deterministically and a hallucinated
 selector is a broken tool. Instead Playwright visits h's URLs and harvests exact,
@@ -148,21 +151,16 @@ The emitted server is standalone and contains no model calls. It shares one runt
 
 ## 5. Partner technologies
 
-Three partners, each doing the thing it is actually best at — and one stage, stage 3 above,
-deliberately using none of them.
-
 | Partner    | Where                                      | What it does                                                                                | Without it                                                                       |
 | ---------- | ------------------------------------------ | ------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | **Tavily** | `app/_lib/stages/seed.ts`                  | Finds public docs for the target app and distils them into task-shaped capabilities         | The explorer has no goals; tool descriptions come from DOM text and read like it |
-| **h**      | `app/_lib/stages/h-scout.ts`               | Computer-use agent logs in, looks at the app, returns the URLs of screens that hold records | Falls back to a blind BFS crawl, which missed 2 of the 8 record screens          |
+| **h**      | `app/_lib/stages/h-scout.ts`               | Computer-use agent logs in, looks at the app, returns the URLs of screens that hold records | Falls back to a blind BFS crawl, which missed 4 of the 8 record screens          |
 | **OpenAI** | `app/_lib/stages/seed.ts`, `synthesize.ts` | Distils capabilities; compiles screens + labels into typed tools with step recipes          | No tool synthesis — the pipeline stops at a site map                             |
 
 Playwright is the deterministic runtime underneath all of it (`app/_lib/driver/`), and
 `@modelcontextprotocol/sdk` writes the output.
 
 ### APIs, frameworks, and tools
-
-Jury checklist — every dependency that is load-bearing, and the file that uses it.
 
 | Name                                                                     | Role                                      | Where                                           |
 | ------------------------------------------------------------------------ | ----------------------------------------- | ----------------------------------------------- |
@@ -176,13 +174,6 @@ Jury checklist — every dependency that is load-bearing, and the file that uses
 | [Zod](https://zod.dev) v4                                                | Structured `answerSchema` for h           | `app/_lib/stages/h-scout.ts`                    |
 | [@modelcontextprotocol/sdk](https://modelcontextprotocol.io)             | Generated MCP server                      | `app/_lib/mcp/emit.ts`, `mcp-server/server.mts` |
 | `tsx`                                                                    | Run the generated server and CLI scripts  | `package.json`, `scripts/`                      |
-
-HTTP surface of this repo (not a public SaaS — local Next routes):
-
-| Method | Path            | Body                                           | Returns                             |
-| ------ | --------------- | ---------------------------------------------- | ----------------------------------- |
-| `POST` | `/api/compile`  | `{ target, username?, password? }`             | SSE stream of `StageEvent`          |
-| `POST` | `/api/run-tool` | `{ target, tool, args, username?, password? }` | `{ output, ms }` from a live recipe |
 
 The generated MCP server speaks stdio MCP: `tools/list` and `tools/call`. It reads
 `mcp-server/tools.json` and executes the same `runTool` the console uses.
@@ -239,10 +230,6 @@ and no network calls:
 [synthesize]  ✓ 7 tools compiled (cached)
 [emit]        ✓ 7 tools -> mcp-server/server.mts
 ```
-
-A judge with zero keys still sees the entire pipeline run, the real screens,
-the real generated tools and the real MCP server. In replay mode a missing fixture is a hard error
-rather than a silent fallback to the network.
 
 ## 7. Using the generated MCP server
 
@@ -362,44 +349,11 @@ npx tsx scripts/run-tool.ts search_system_users username=Admin
 
 Recompiling can change the tool set — synthesis is not frozen. A recent OrangeHRM compile produced the seven names listed above.
 
-## 8. Project layout
-
-```
-app/
-  page.tsx                     the console: target form, live pipeline, tools, MCP config
-  layout.tsx  globals.css      root layout; all design tokens (Tailwind v4, no config file)
-  _components/
-    PipelineRail.tsx           the five stages as an electrical conduit that energises in turn
-    LogStream.tsx              SSE build log, pinned to the newest line
-    ToolCard.tsx               a compiled tool: signature, recipe, and a form to call it live
-  _lib/
-    types.ts                   the spine — every stage and every fixture is one of these shapes
-    cache.ts                   per-stage disk cache and REPLAY mode
-    pipeline.ts                the compiler: runs all five stages, yields progress events
-    stages/seed.ts             1. Tavily + OpenAI -> Capability[]
-    stages/h-scout.ts          2a. h computer-use agent -> record-screen URLs
-    stages/explore.ts          2b. Playwright harvest -> SiteMap (selectors, shots, containers)
-    stages/understand.ts       3. rule table -> Labeled[] (role + entity per control)
-    stages/synthesize.ts       4. OpenAI structured outputs -> ToolSpec[]
-    mcp/emit.ts                5. ToolSpec[] -> a standalone MCP server on disk
-    driver/playwright.ts       login, selector harvesting, recipe execution
-    driver/run.ts              the shared tool runtime — UI and MCP server both call this
-  api/compile/route.ts         POST {url, creds} -> SSE stream of stage events
-  api/run-tool/route.ts        POST {tool, args} -> executes a recipe live
-scripts/                       one runner per stage, for iterating without the UI
-  compile.ts                   the whole pipeline headlessly — how you rehearse a replay
-  run-tool.ts                  call a compiled tool from the terminal
-fixtures/<slug>/*.json         recorded stage outputs; what REPLAY=1 serves
-mcp-server/                    generated output: server.mts, tools.json, claude_mcp_config.json
-public/shots/                  screenshots captured during the crawl
-```
-
-## 9. Limitations and what's next
+## 8. Limitations and what's next
 
 Where this is honestly weak:
 
-- **Selectors are brittle against redesigns.** They survive reloads and pagination, not a
-  re-skin. Recompiling is cheap, but nothing currently _detects_ that a tool has gone stale — a
+- **Selectors are brittle against redesigns.** They survive reloads and pagination, not a complete redesign. Recompiling is cheap, but nothing currently _detects_ that a tool has gone stale — a
   health check that replays each recipe and flags empty reads is the obvious next step.
 - **No write-tool safety rails.** The compiler can describe `destructive` controls but there is no
   confirmation step, dry-run or audit log, so we deliberately kept the demo to read and search
@@ -418,9 +372,13 @@ Where this is honestly weak:
   can answer with a different application's URLs. Off-origin hints are now discarded in
   `h-scout.ts` and again in `explore.ts`, so the worst case is a thin site map rather than tools
   compiled against the wrong app. Recognising "this app has no records" and saying so is not built.
-- **Two shapes of target are proven, not “any website.”** OrangeHRM (login + records) and
-  Awwwards (public search). Cookie walls are dismissed at runtime; selectors still break when the
-  host redesigns.
+- **Two shapes of target are proven, not “any website.”** OrangeHRM (login + records, 9 screens
+  → 7 tools) and Awwwards (public search, no credentials at all, 9 screens → 7 tools). Both ship as
+  committed fixtures, so `REPLAY=1 TARGET=https://www.awwwards.com npx tsx scripts/compile.ts`
+  replays the second one without a single API key. Cookie walls are dismissed at runtime; selectors
+  still break when the host redesigns. Content-heavy sites also expose a weakness: Awwwards yielded
+  1,855 controls of which 1,786 classified as `nav`, so the signal-to-noise ratio is far worse than
+  on a records-oriented admin panel.
 - **The read heuristic favours tables.** Apps that render records as prose or canvas will produce
   tools that return page text rather than structured rows.
 - **Local only.** The generated MCP server runs over stdio on the machine that compiled it.
