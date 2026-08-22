@@ -12,8 +12,10 @@ what each control does, and writes a standalone MCP server with typed tools that
 
 ## 1. What it solves
 
-Most software in the world has no API. Internal admin panels, council portals, twenty-year-old HR
-systems: the data is right there on screen and completely unreachable by an agent.
+A great deal of working software has no API you can use. Internal admin panels, council portals,
+twenty-year-old HR systems: the data is right there on screen and completely unreachable by an
+agent. And where an API does exist, it is often not one you can get at — wrong tier, no credentials,
+or a procurement conversation you are not going to win today.
 
 Today there are two options, and both are bad. Either the task goes unautomated, or the agent burns
 a computer-use session on _every single call_: it opens a browser, squints at the page, and clicks
