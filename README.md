@@ -21,8 +21,8 @@ Anderson's employee ID?" Ask the same question twice and you pay twice.
 
 Portico makes it a compile step. You pay an agent **once** to understand the app, and from then on
 the same question is one typed MCP tool call — a page load and three DOM actions, no model, no
-reasoning, no drift. On the OrangeHRM demo below, that call returns a structured record in **8.7
-seconds** and costs nothing but the page load.
+reasoning, no drift. On the OrangeHRM demo below, that call returns a structured record in **about
+11 seconds** and costs nothing but the page load.
 
 ## 2. The thesis
 
@@ -63,69 +63,8 @@ Calling search_system_users({"username":"Admin"})
 Admin | Admin | Emp_qBPmlQ User_hrEPXuHM | Enabled
 ```
 
-That same call takes ~9 s from the console's **run** button, and returns the same record over MCP
+That same call takes ~11 s from the console's **run** button, and returns the same record over MCP
 `tools/call` through the generated server.
-
-## Demo script — delete this section after recording
-
-2-minute Loom. Have `npm run dev` already running. Compile OrangeHRM **before** you hit record so
-the pipeline is cached — a cold explore takes minutes and will blow the clock. When you press
-**compile** on camera it should stream from fixtures in a few seconds.
-
-**0:00–0:20 — the problem (talking over the idle console)**
-
-> Most software has no API. An agent that needs an employee record today either cannot do the
-> task, or burns a computer-use session on every call. Portico turns that into a compile step:
-> discovery is agentic and happens once; execution is a compiled Playwright recipe. No model at
-> runtime.
-
-Show the masthead. URL is already `https://opensource-demo.orangehrmlive.com`, username `Admin`,
-password `admin123`. Say this is OrangeHRM's public sandbox of a real HR product, not an app we
-built.
-
-**0:20–0:45 — compile**
-
-Press **compile**. Narrate the rail as stages light up:
-
-1. **Research / Tavily** — reads public docs, returns task-shaped capabilities.
-2. **Explore / h + Playwright** — a computer-use agent finds the record screens; Playwright
-   harvests exact selectors. h never supplies a selector.
-3. **Understand** — a rule table labels every control. No model. Same answer every run.
-4. **Compile / OpenAI** — one frontier call emits typed tools with step recipes.
-5. **Emit / MCP** — writes `mcp-server/server.mts`. Grep it: zero LLM calls.
-
-**0:45–1:20 — live walkthrough (the money shot)**
-
-Scroll to **Compiled tools**.
-
-1. `search_system_users` → type `Admin` → **run**. Wait for the row
-   (`Admin | Admin | … | Enabled`). Say: _that was a page load and three DOM actions, not an
-   agent session. Ask again and you pay the page load again, not another model._
-2. `list_skills` → **run** (no input). Rows like `Java | Programming Language` come from
-   Admin → Qualifications → Skills on the live demo, not from a fixture.
-
-Do **not** run every tool. Two is enough.
-
-**1:20–1:45 — attach to an agent**
-
-Scroll to **attach to an agent**. Click **copy**. Say:
-
-> The same runtime the console just used is now an MCP server. Paste this into Claude Code.
-> `search_system_users({ username: "Admin" })` is one tool call.
-
-Optional if you have Claude Code already wired: show the tool name in the session. Skip if it
-costs time.
-
-**1:45–2:00 — close**
-
-> Discovery once. Execution forever. The compiler used Tavily, h, and OpenAI. The generated
-> server uses none of them.
-
-Stop. Do not keep talking into the credits.
-
-**If compile is slow on camera:** cut, run `REPLAY=1 npm run dev`, record the rail from replay,
-then cut to a pre-recorded **run** against the live site. Judges care that the tool hits OrangeHRM,
-not that explore ran cold in the same take.
 
 ## 4. How it works
 
@@ -165,7 +104,7 @@ Reviews** and **Job Titles**, which the blind link crawl never reached.
 h is never asked for a selector. Prose cannot be replayed deterministically and a hallucinated
 selector is a broken tool. Instead Playwright visits h's URLs and harvests exact,
 reload-survivable selectors — plus a screenshot and the repeating result containers (tables, card
-grids) that a read tool can return. 10 screens, 230 controls, 0 positional selectors.
+grids) that a read tool can return. 9 screens, 180 controls, 0 positional selectors.
 
 If h is slow or unavailable, the pure-Playwright BFS crawl stands in and the pipeline continues.
 
@@ -173,13 +112,13 @@ If h is slow or unavailable, the pure-Playwright BFS crawl stands in and the pip
 
 **In:** `SiteMap`. **Out:** `Labeled[]`. **Powered by:** a deterministic rule table.
 
-Every one of those 230 controls needs a verdict: is this a search input, a filter, a submit, a nav
+Every one of those 180 controls needs a verdict: is this a search input, a filter, a submit, a nav
 link, a create button, something destructive? And if it takes a value, what kind — a person, a
 date, an identifier? Stage 4 cannot write `search_employees_by_name(employee_name)` without knowing
 which input is the search box and what it holds.
 
 This is the one stage with **no model in it, by choice.** It is the highest-volume step in the
-pipeline — 230 verdicts for this one app, one per control — and the judgment each one needs is
+pipeline — 180 verdicts for this one app, one per control — and the judgment each one needs is
 shallow: "Delete" is destructive, a `<select>` narrows a result set, a field labelled "Employee
 Name" holds a person. Sending that to a frontier model would add hundreds of calls to every compile
 to answer questions a rule table answers in microseconds, and answers the _same way every run_.
@@ -295,10 +234,10 @@ and no network calls:
 
 ```
 [seed]        ✓ 10 documented capabilities (cached)
-[explore]     ✓ 10 screens, 230 elements (cached)
-[understand]  ✓ 230 elements labelled (cached)
-[synthesize]  ✓ 6 tools compiled (cached)
-[emit]        ✓ 6 tools -> mcp-server/server.mts
+[explore]     ✓ 9 screens, 180 elements (cached)
+[understand]  ✓ 180 elements labelled (cached)
+[synthesize]  ✓ 7 tools compiled (cached)
+[emit]        ✓ 7 tools -> mcp-server/server.mts
 ```
 
 A judge with zero keys still sees the entire pipeline run, the real screens,
@@ -361,7 +300,7 @@ Restart the Claude Code session (or `/mcp`) so it picks the server up. Then:
 
 > Search OrangeHRM system users for username Admin.
 
-The agent should call `search_system_users` with `{ "username": "Admin" }`. A live row comes back in about 9 seconds. Follow-ups like “list the configured skills” hit `list_skills` with no arguments.
+The agent should call `search_system_users` with `{ "username": "Admin" }`. A live row comes back in about 11 seconds. Follow-ups like “list the configured skills” hit `list_skills` with no arguments.
 
 Check it is attached: `claude mcp list`.
 
