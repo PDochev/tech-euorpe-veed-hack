@@ -2,7 +2,7 @@
 
 **Compiles a web app that has no API into an MCP server.**
 
-Point Portico at a URL (abd login credentials if needed). It explores the app, works out
+Point Portico at a URL (add login credentials if needed). It explores the app, works out
 what each control does, and writes a standalone MCP server with typed tools that any agent can call.
 
 - Discovery is agentic and happens once.
