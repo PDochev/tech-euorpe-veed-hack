@@ -3,8 +3,9 @@
 import { useState } from "react";
 import { LogStream, type LogLine } from "./_components/LogStream";
 import { PipelineRail, type StageState } from "./_components/PipelineRail";
+import { ScreenModal } from "./_components/ScreenModal";
 import { ToolCard } from "./_components/ToolCard";
-import type { SiteMap, StageEvent, StageName, ToolSpec } from "./_lib/types";
+import type { Screen, SiteMap, StageEvent, StageName, ToolSpec } from "./_lib/types";
 
 const IDLE: Record<StageName, StageState> = {
   seed: { status: "idle", label: "Read the app's documentation" },
@@ -47,6 +48,7 @@ export default function Console() {
   const [results, setResults] = useState<Record<string, RunResult>>({});
   const [runningTool, setRunningTool] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
+  const [preview, setPreview] = useState<Screen | null>(null);
 
   async function compile() {
     setCompiling(true);
@@ -284,13 +286,20 @@ export default function Console() {
                 style={{ animationDelay: `${i * 45}ms` }}
               >
                 {s.screenshot && (
-                  // Screenshots are generated at runtime, so next/image cannot pre-optimise them.
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={s.screenshot}
-                    alt={s.title}
-                    className="w-full h-[104px] object-cover object-top border-b border-[var(--color-line)] opacity-70"
-                  />
+                  <button
+                    type="button"
+                    className="block w-full cursor-zoom-in"
+                    onClick={() => setPreview(s)}
+                    aria-label={`View ${screenLabel(s.url, s.title)} full size`}
+                  >
+                    {/* Screenshots are generated at runtime, so next/image cannot pre-optimise them. */}
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={s.screenshot}
+                      alt={s.title}
+                      className="w-full h-[104px] object-cover object-top border-b border-[var(--color-line)] opacity-70 hover:opacity-100 transition-opacity"
+                    />
+                  </button>
                 )}
                 <figcaption className="p-2.5">
                   <p className="text-[11px] truncate text-[var(--color-ink)]">
@@ -304,6 +313,14 @@ export default function Console() {
               </figure>
             ))}
           </div>
+          {preview?.screenshot && (
+            <ScreenModal
+              src={preview.screenshot}
+              title={screenLabel(preview.url, preview.title)}
+              caption={`${preview.elements.length} controls · ${preview.resultContainers.length} result sets · ${preview.url}`}
+              onClose={() => setPreview(null)}
+            />
+          )}
         </section>
       )}
 
