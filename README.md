@@ -60,11 +60,18 @@ Verified end to end:
 ```
 $ npx tsx scripts/run-tool.ts search_system_users username=Admin
 
-Calling search_system_users({"username":"Admin"})
+Target    https://opensource-demo.orangehrmlive.com
+Signed in Admin
+Calling   search_system_users({"username":"Admin"})
 
 --- returned ---
-Admin | Admin | Emp_qBPmlQ User_hrEPXuHM | Enabled
+Admin | Admin | Emp_Mljqsk User_wBESeYLS | Enabled
 ```
+
+Note the two separate `Admin`s. **Signed in** is the sandbox login, taken from
+`PORTICO_USERNAME` / `PORTICO_PASSWORD`. The `username=Admin` argument is what the tool
+searches _for_ — `search_system_users` happens to take a parameter also called `username`. They are
+unrelated; `list_skills` takes no arguments at all and still signs in the same way.
 
 That same call takes ~11 s from the console's **run** button, and returns the same record over MCP
 `tools/call` through the generated server.
