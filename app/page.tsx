@@ -87,18 +87,38 @@ export default function Console() {
 
         const { stage } = event;
         if (event.type === "stage:start") {
-          setStates((s) => ({ ...s, [stage]: { status: "run", label: event.label } }));
+          setStates((s) => ({
+            ...s,
+            [stage]: { status: "run", label: event.label },
+          }));
         } else if (event.type === "stage:log") {
-          setLines((l) => [...l, { stage, message: event.message, kind: "log" }]);
+          setLines((l) => [
+            ...l,
+            { stage, message: event.message, kind: "log" },
+          ]);
         } else if (event.type === "stage:done") {
           setStates((s) => ({
             ...s,
-            [stage]: { ...s[stage], status: "done", summary: event.summary, cached: event.cached },
+            [stage]: {
+              ...s[stage],
+              status: "done",
+              summary: event.summary,
+              cached: event.cached,
+            },
           }));
-          setLines((l) => [...l, { stage, message: event.summary, kind: "done" }]);
+          setLines((l) => [
+            ...l,
+            { stage, message: event.summary, kind: "done" },
+          ]);
         } else if (event.type === "stage:error") {
-          setStates((s) => ({ ...s, [stage]: { ...s[stage], status: "error" } }));
-          setLines((l) => [...l, { stage, message: event.message, kind: "error" }]);
+          setStates((s) => ({
+            ...s,
+            [stage]: { ...s[stage], status: "error" },
+          }));
+          setLines((l) => [
+            ...l,
+            { stage, message: event.message, kind: "error" },
+          ]);
         }
       }
     }
@@ -113,12 +133,21 @@ export default function Console() {
       const res = await fetch("/api/run-tool", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ target, username, password, tool: tool.name, args }),
+        body: JSON.stringify({
+          target,
+          username,
+          password,
+          tool: tool.name,
+          args,
+        }),
       });
       const payload = (await res.json()) as RunResult;
       setResults((r) => ({ ...r, [tool.name]: payload }));
     } catch (err) {
-      setResults((r) => ({ ...r, [tool.name]: { error: (err as Error).message } }));
+      setResults((r) => ({
+        ...r,
+        [tool.name]: { error: (err as Error).message },
+      }));
     } finally {
       setRunningTool(null);
     }
@@ -127,14 +156,18 @@ export default function Console() {
   const mcpConfig = JSON.stringify(
     {
       mcpServers: {
-        portico: { command: "npx", args: ["tsx", "<repo>/mcp-server/server.mts"] },
+        portico: {
+          command: "npx",
+          args: ["tsx", "<repo>/mcp-server/server.mts"],
+        },
       },
     },
     null,
     2,
   );
 
-  const elementCount = siteMap?.screens.reduce((n, s) => n + s.elements.length, 0) ?? 0;
+  const elementCount =
+    siteMap?.screens.reduce((n, s) => n + s.elements.length, 0) ?? 0;
 
   /**
    * The screen's name from its URL, ignoring trailing record identifiers —
@@ -158,8 +191,8 @@ export default function Console() {
               PORT<span className="text-[var(--color-signal)]">I</span>CO
             </h1>
             <p className="mt-2.5 text-[12.5px] text-[var(--color-ink-dim)] max-w-[54ch] leading-relaxed">
-              Compiles a web app that has no API into an MCP server. Discovery is
-              agentic; execution is compiled.
+              Compiles a web app that has no API into an MCP server. Discovery
+              is agentic; execution is compiled.
             </p>
           </div>
           <p className="text-[10.5px] uppercase tracking-[0.16em] text-[var(--color-ink-faint)] leading-relaxed text-right">
@@ -261,7 +294,8 @@ export default function Console() {
                     {screenLabel(s.url, s.title)}
                   </p>
                   <p className="text-[10px] text-[var(--color-ink-faint)] mt-0.5">
-                    {s.elements.length} controls · {s.resultContainers.length} result sets
+                    {s.elements.length} controls · {s.resultContainers.length}{" "}
+                    result sets
                   </p>
                 </figcaption>
               </figure>
@@ -281,7 +315,11 @@ export default function Console() {
           </div>
           <div className="grid gap-3 lg:grid-cols-2">
             {tools.map((t, i) => (
-              <div key={t.name} className="rise" style={{ animationDelay: `${i * 55}ms` }}>
+              <div
+                key={t.name}
+                className="rise"
+                style={{ animationDelay: `${i * 55}ms` }}
+              >
                 <ToolCard
                   tool={t}
                   onRun={runTool}

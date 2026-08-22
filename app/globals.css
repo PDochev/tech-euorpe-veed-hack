@@ -47,11 +47,12 @@ body::before {
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  background-image:
-    linear-gradient(to right, rgba(26, 28, 31, 0.055) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(26, 28, 31, 0.055) 1px, transparent 1px);
   background-size: 46px 46px;
-  mask-image: radial-gradient(ellipse 110% 85% at 50% 0%, #000 35%, transparent 100%);
+  mask-image: radial-gradient(
+    ellipse 110% 85% at 50% 0%,
+    #000 35%,
+    transparent 100%
+  );
 }
 
 /* Paper grain: keeps large light areas from banding. */
@@ -85,7 +86,9 @@ body::after {
 .lamp[data-state="run"] {
   border-color: var(--color-signal);
   background: var(--color-signal);
-  box-shadow: 0 0 0 4px rgba(217, 109, 18, 0.14), 0 0 18px 2px rgba(217, 109, 18, 0.38);
+  box-shadow:
+    0 0 0 4px rgba(217, 109, 18, 0.14),
+    0 0 18px 2px rgba(217, 109, 18, 0.38);
   animation: pulse 1.15s ease-in-out infinite;
 }
 .lamp[data-state="done"] {
@@ -100,8 +103,13 @@ body::after {
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.42; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.42;
+  }
 }
 
 /* The conduit segment between two stage lamps; fills when the stage completes. */
@@ -118,12 +126,20 @@ body::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, var(--color-go), rgba(31, 138, 77, 0.18));
+  background: linear-gradient(
+    to bottom,
+    var(--color-go),
+    rgba(31, 138, 77, 0.18)
+  );
   animation: fill 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 @keyframes fill {
-  from { transform: translateY(-100%); }
-  to { transform: translateY(0); }
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
 
 /* --- Surfaces ---------------------------------------------------------- */
@@ -145,19 +161,25 @@ body::after {
   opacity: 0.7;
 }
 .ticked::before {
-  top: -1px; left: -1px;
-  border-top: 1px solid; border-left: 1px solid;
+  top: -1px;
+  left: -1px;
+  border-top: 1px solid;
+  border-left: 1px solid;
 }
 .ticked::after {
-  bottom: -1px; right: -1px;
-  border-bottom: 1px solid; border-right: 1px solid;
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 1px solid;
+  border-right: 1px solid;
 }
 
 .field {
   background: #fffdf8;
   border: 1px solid var(--color-line);
   color: var(--color-ink);
-  transition: border-color 0.18s, box-shadow 0.18s;
+  transition:
+    border-color 0.18s,
+    box-shadow 0.18s;
 }
 .field:focus {
   outline: none;
@@ -166,34 +188,68 @@ body::after {
 }
 
 .btn-go {
-  background: linear-gradient(180deg, var(--color-signal), var(--color-signal-deep));
+  background: linear-gradient(
+    180deg,
+    var(--color-signal),
+    var(--color-signal-deep)
+  );
   color: #fff8ee;
   font-weight: 700;
   border: 1px solid #e08a3a;
-  transition: transform 0.12s, filter 0.18s, box-shadow 0.18s;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.28) inset, 0 6px 22px -8px rgba(217, 109, 18, 0.55);
+  transition:
+    transform 0.12s,
+    filter 0.18s,
+    box-shadow 0.18s;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.28) inset,
+    0 6px 22px -8px rgba(217, 109, 18, 0.55);
 }
-.btn-go:hover:not(:disabled) { filter: brightness(1.06); }
-.btn-go:active:not(:disabled) { transform: translateY(1px); }
-.btn-go:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
+.btn-go:hover:not(:disabled) {
+  filter: brightness(1.06);
+}
+.btn-go:active:not(:disabled) {
+  transform: translateY(1px);
+}
+.btn-go:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none;
+}
 
 /* Staggered entrance for streamed content. */
 @keyframes rise {
-  from { opacity: 0; transform: translateY(7px); }
-  to { opacity: 1; transform: none; }
+  from {
+    opacity: 0;
+    transform: translateY(7px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
-.rise { animation: rise 0.42s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.rise {
+  animation: rise 0.42s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
 
-::-webkit-scrollbar { width: 9px; height: 9px; }
-::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
 ::-webkit-scrollbar-thumb {
   background: var(--color-line-bright);
   border-radius: 99px;
 }
-::-webkit-scrollbar-thumb:hover { background: var(--color-ink-faint); }
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-ink-faint);
+}
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
