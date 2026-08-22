@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "portico-opensource-demo-orangehrmlive-com": {
+      "command": "npx",
+      "args": [
+        "tsx",
+        "/Users/plamendochev/Desktop/Projects/tech-euorpe-veed-hack/mcp-server/server.mts"
+      ]
+    }
+  }
+}

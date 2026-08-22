@@ -1,0 +1,257 @@
+[
+  {
+    "name": "search_system_users",
+    "description": "Search OrangeHRM admin system users by username and return matching user records.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "Username to search for."
+        }
+      },
+      "required": []
+    },
+    "recipe": [
+      {
+        "action": "goto",
+        "value": "https://opensource-demo.orangehrmlive.com/web/index.php/admin/viewSystemUsers"
+      },
+      {
+        "action": "fill",
+        "selector": "div.oxd-input-group:has-text(\"Username\") >> input",
+        "arg": "username"
+      },
+      {
+        "action": "click",
+        "selector": "button:has-text(\"Search\")"
+      },
+      {
+        "action": "wait",
+        "ms": 2000
+      },
+      {
+        "action": "read",
+        "selector": "div.oxd-table-body"
+      }
+    ],
+    "readSelector": "div.oxd-table-body",
+    "derivedFrom": [
+      "s1"
+    ]
+  },
+  {
+    "name": "search_employees_by_id",
+    "description": "Search the PIM employee list by employee ID and return matching employee records.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "employee_id": {
+          "type": "string",
+          "description": "Employee ID to search for."
+        }
+      },
+      "required": []
+    },
+    "recipe": [
+      {
+        "action": "goto",
+        "value": "https://opensource-demo.orangehrmlive.com/web/index.php/pim/viewEmployeeList"
+      },
+      {
+        "action": "fill",
+        "selector": "div.oxd-input-group:has-text(\"Employee Id\") >> input",
+        "arg": "employee_id"
+      },
+      {
+        "action": "click",
+        "selector": "button:has-text(\"Search\")"
+      },
+      {
+        "action": "wait",
+        "ms": 2000
+      },
+      {
+        "action": "read",
+        "selector": "div.oxd-table-body"
+      }
+    ],
+    "readSelector": "div.oxd-table-body",
+    "derivedFrom": [
+      "s2"
+    ]
+  },
+  {
+    "name": "search_employees_by_name",
+    "description": "Search the PIM employee list by employee name and return matching employee records.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "employee_name": {
+          "type": "string",
+          "description": "Employee name to search for."
+        }
+      },
+      "required": []
+    },
+    "recipe": [
+      {
+        "action": "goto",
+        "value": "https://opensource-demo.orangehrmlive.com/web/index.php/pim/viewEmployeeList"
+      },
+      {
+        "action": "fill",
+        "selector": "input[placeholder=\"Type for hints...\"]",
+        "arg": "employee_name"
+      },
+      {
+        "action": "click",
+        "selector": "button:has-text(\"Search\")"
+      },
+      {
+        "action": "wait",
+        "ms": 2000
+      },
+      {
+        "action": "read",
+        "selector": "div.oxd-table-body"
+      }
+    ],
+    "readSelector": "div.oxd-table-body",
+    "derivedFrom": [
+      "s2"
+    ]
+  },
+  {
+    "name": "search_candidate_keywords",
+    "description": "Search recruitment candidates by comma-separated keywords and return matching candidate records.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "keywords": {
+          "type": "string",
+          "description": "Comma-separated keywords to search for."
+        }
+      },
+      "required": []
+    },
+    "recipe": [
+      {
+        "action": "goto",
+        "value": "https://opensource-demo.orangehrmlive.com/web/index.php/recruitment/viewCandidates"
+      },
+      {
+        "action": "fill",
+        "selector": "input[placeholder=\"Enter comma seperated words...\"]",
+        "arg": "keywords"
+      },
+      {
+        "action": "click",
+        "selector": "button:has-text(\"Search\")"
+      },
+      {
+        "action": "wait",
+        "ms": 2000
+      },
+      {
+        "action": "read",
+        "selector": "div.oxd-table-body"
+      }
+    ],
+    "readSelector": "div.oxd-table-body",
+    "derivedFrom": [
+      "s5"
+    ]
+  },
+  {
+    "name": "search_candidates_by_application_date",
+    "description": "Search recruitment candidates by application date range and return matching candidate records.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "from_date": {
+          "type": "string",
+          "description": "Start date for application search."
+        },
+        "to_date": {
+          "type": "string",
+          "description": "End date for application search."
+        }
+      },
+      "required": []
+    },
+    "recipe": [
+      {
+        "action": "goto",
+        "value": "https://opensource-demo.orangehrmlive.com/web/index.php/recruitment/viewCandidates"
+      },
+      {
+        "action": "fill",
+        "selector": "input[placeholder=\"From\"]",
+        "arg": "from_date"
+      },
+      {
+        "action": "fill",
+        "selector": "input[placeholder=\"To\"]",
+        "arg": "to_date"
+      },
+      {
+        "action": "click",
+        "selector": "button:has-text(\"Search\")"
+      },
+      {
+        "action": "wait",
+        "ms": 2000
+      },
+      {
+        "action": "read",
+        "selector": "div.oxd-table-body"
+      }
+    ],
+    "readSelector": "div.oxd-table-body",
+    "derivedFrom": [
+      "s5"
+    ]
+  },
+  {
+    "name": "search_employee_timesheets",
+    "description": "Search employee timesheets by employee name and return matching timesheet records.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "employee_name": {
+          "type": "string",
+          "description": "Employee name to search timesheets for."
+        }
+      },
+      "required": []
+    },
+    "recipe": [
+      {
+        "action": "goto",
+        "value": "https://opensource-demo.orangehrmlive.com/web/index.php/time/viewEmployeeTimesheet"
+      },
+      {
+        "action": "fill",
+        "selector": "input[placeholder=\"Type for hints...\"]",
+        "arg": "employee_name"
+      },
+      {
+        "action": "click",
+        "selector": "button:has-text(\"View\")"
+      },
+      {
+        "action": "wait",
+        "ms": 2000
+      },
+      {
+        "action": "read",
+        "selector": "div.oxd-table-body"
+      }
+    ],
+    "readSelector": "div.oxd-table-body",
+    "derivedFrom": [
+      "s4"
+    ]
+  }
+]

@@ -1,0 +1,52 @@
+[
+  {
+    "name": "Edit company information",
+    "description": "Update the organization’s basic company details in the Admin module and save the changes.",
+    "source": "tavily"
+  },
+  {
+    "name": "Define company structure",
+    "description": "Set up organizational units and structure information such as departments or reporting hierarchy.",
+    "source": "tavily"
+  },
+  {
+    "name": "Manage job-related settings",
+    "description": "Create and maintain job titles, job descriptions, and pay grades.",
+    "source": "tavily"
+  },
+  {
+    "name": "Configure skills and qualifications",
+    "description": "Add and manage skills and qualification categories used in the system.",
+    "source": "tavily"
+  },
+  {
+    "name": "Manage customers and projects",
+    "description": "Create and maintain customer and project records in the Admin module.",
+    "source": "tavily"
+  },
+  {
+    "name": "Set user access and security rules",
+    "description": "Configure security-related settings and define access rights for users and roles.",
+    "source": "tavily"
+  },
+  {
+    "name": "Edit employee contact details",
+    "description": "View and update an employee’s contact information, including work email.",
+    "source": "tavily"
+  },
+  {
+    "name": "Manage emergency contacts and dependents",
+    "description": "Add, edit, and maintain emergency contact and dependent information for employees.",
+    "source": "tavily"
+  },
+  {
+    "name": "Maintain immigration records",
+    "description": "Add and upload employee immigration documents and record immigration details.",
+    "source": "tavily"
+  },
+  {
+    "name": "Manage employee records in PIM",
+    "description": "Store and update employee information within the PIM module.",
+    "source": "tavily"
+  }
+]

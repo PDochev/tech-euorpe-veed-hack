@@ -1,0 +1,50 @@
+[
+  {
+    "name": "User Management - List and search system users",
+    "description": "Lists all system users with filters for Username, User Role, Employee Name, and Status. Found 16 records.",
+    "url": "https://opensource-demo.orangehrmlive.com/web/index.php/admin/viewSystemUsers",
+    "source": "h"
+  },
+  {
+    "name": "Employee List - List and search employees",
+    "description": "Lists all employees with filters for Employee Name, Employee Id, Employment Status, Supervisor Name, Job Title, and Sub Unit. Found 207 records.",
+    "url": "https://opensource-demo.orangehrmlive.com/web/index.php/pim/viewEmployeeList",
+    "source": "h"
+  },
+  {
+    "name": "Candidates - List and search job candidates",
+    "description": "Lists all job candidates with search filters. Found 74 records.",
+    "url": "https://opensource-demo.orangehrmlive.com/web/index.php/recruitment/viewCandidates",
+    "source": "h"
+  },
+  {
+    "name": "Leave List - List and search leave requests",
+    "description": "Lists all leave requests with filters for From Date, To Date, Status, Leave Type, Employee Name, and Sub Unit.",
+    "url": "https://opensource-demo.orangehrmlive.com/web/index.php/leave/viewLeaveList",
+    "source": "h"
+  },
+  {
+    "name": "Timesheets - List and search employee timesheets",
+    "description": "Lists employee timesheet records with search by Employee Name. Found 3 records.",
+    "url": "https://opensource-demo.orangehrmlive.com/web/index.php/time/viewEmployeeTimesheet",
+    "source": "h"
+  },
+  {
+    "name": "Directory - List and search employee directory",
+    "description": "Lists all employees with filters for Employee Name, Job Title, and Location. Found 207 records.",
+    "url": "https://opensource-demo.orangehrmlive.com/web/index.php/directory/viewDirectory",
+    "source": "h"
+  },
+  {
+    "name": "Performance Reviews - List and search performance evaluations",
+    "description": "Lists performance review records with filters for Employee Name, Job Title, Sub Unit, Review Status, From Date, and To Date.",
+    "url": "https://opensource-demo.orangehrmlive.com/web/index.php/performance/searchEvaluatePerformanceReview",
+    "source": "h"
+  },
+  {
+    "name": "Job Titles - List and search job titles",
+    "description": "Lists job titles with search/filter capability. Currently 0 records.",
+    "url": "https://opensource-demo.orangehrmlive.com/web/index.php/admin/viewJobTitleList",
+    "source": "h"
+  }
+]
