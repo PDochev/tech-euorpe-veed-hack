@@ -1,7 +1,7 @@
 import { chromium, type Browser, type Page } from "playwright";
 import { mkdir } from "node:fs/promises";
 import { join } from "node:path";
-import type { Credentials, Element, ResultContainer, Screen, Step } from "../types";
+import { hasCredentials, type Credentials, type Element, type ResultContainer, type Screen, type Step } from "../types";
 
 /**
  * The deterministic half of Portico.
@@ -31,6 +31,14 @@ export async function launch(headless = true): Promise<Session> {
 export async function login(page: Page, target: string, creds: Credentials): Promise<void> {
   await page.goto(target, { waitUntil: "domcontentloaded" });
 
+  // Public sites (Awwwards, marketing pages) have no login wall. Do not wait
+  // ten seconds looking for a password field that will never appear.
+  if (!hasCredentials(creds)) {
+    await page.waitForLoadState("networkidle").catch(() => {});
+    await dismissOverlays(page);
+    return;
+  }
+
   // Legacy admin panels are increasingly SPAs: the form is not in the initial
   // HTML, so waiting for load is not the same as waiting for the form.
   const password = page.locator('input[type="password"]').first();
@@ -51,6 +59,37 @@ export async function login(page: Page, target: string, creds: Credentials): Pro
   // Wait for the app to actually move us off the login screen.
   await page.waitForURL((u) => u.toString() !== before, { timeout: 15_000 }).catch(() => {});
   await page.waitForLoadState("networkidle").catch(() => {});
+  await dismissOverlays(page);
+}
+
+/**
+ * Cookie walls sit on top of the page and steal the click a compiled recipe
+ * needs. Accept if we can, otherwise hide the overlay so the tool can run.
+ */
+async function dismissOverlays(page: Page): Promise<void> {
+  const overlay = page.locator(
+    '#modal-cookies, [id*="cookie" i], [class*="cookie-banner" i], [class*="cookie-consent" i], #onetrust-banner-sdk, .cc-window',
+  ).first();
+  if (!(await overlay.isVisible().catch(() => false))) return;
+
+  const accept = overlay.getByRole("button", {
+    name: /accept|agree|allow|got it|ok|continue|i understand/i,
+  }).first();
+  if (await accept.isVisible().catch(() => false)) {
+    await accept.click({ timeout: 2000 }).catch(() => {});
+  }
+
+  await page.evaluate(() => {
+    const nodes = document.querySelectorAll(
+      '#modal-cookies, [id*="cookie" i], [class*="cookie-banner" i], [class*="cookie-consent" i], #onetrust-banner-sdk, .cc-window',
+    );
+    for (const el of nodes) {
+      if (!(el instanceof HTMLElement)) continue;
+      el.classList.remove("is-visible", "is-open");
+      el.style.display = "none";
+      el.setAttribute("aria-hidden", "true");
+    }
+  });
 }
 
 /**
@@ -301,6 +340,7 @@ export async function executeRecipe(
       case "goto":
         await page.goto(step.value || "", { waitUntil: "domcontentloaded" });
         await page.waitForTimeout(1500); // SPA screens render after load
+        await dismissOverlays(page);
         break;
       case "fill":
         // Skip optional arguments the caller omitted rather than clearing the field.
@@ -310,7 +350,10 @@ export async function executeRecipe(
         if (step.selector && value) await page.locator(step.selector).first().selectOption(value);
         break;
       case "click":
-        if (step.selector) await page.locator(step.selector).first().click();
+        if (step.selector) {
+          await dismissOverlays(page);
+          await page.locator(step.selector).first().click({ force: true });
+        }
         await page.waitForLoadState("networkidle").catch(() => {});
         break;
       case "wait":
@@ -335,6 +378,10 @@ export async function executeRecipe(
           output = rows.join("\n");
         }
         break;
+      }
+      default: {
+        const _exhaustive: never = step.action;
+        void _exhaustive;
       }
     }
   }

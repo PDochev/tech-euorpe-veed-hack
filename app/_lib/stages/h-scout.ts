@@ -1,7 +1,7 @@
 import { HaiAgentsClient } from "hai-agents";
 import { z } from "zod";
 import { isSameOrigin } from "./explore";
-import type { Capability, Credentials } from "../types";
+import { hasCredentials, type Capability, type Credentials } from "../types";
 
 /**
  * Stage 2a: send a computer-use agent in to find out what this app can do.
@@ -41,13 +41,17 @@ export async function hScout(
         .join("\n")}\nUse these as leads, but only report what you actually see.`
     : "";
 
-  const prompt = `Go to ${target} and sign in with username "${creds.username}" and password "${creds.password}".
+  const auth = hasCredentials(creds)
+    ? `Go to ${target} and sign in with username "${creds.username}" and password "${creds.password}".`
+    : `Go to ${target}. There is no login — this is a public site. Do not click Sign up or Log in.`;
 
-Then explore the application and identify the screens where a user can SEARCH FOR or LIST records
-(employees, users, candidates, leave requests, and so on).
+  const prompt = `${auth}
+
+Then explore the site and identify the most useful screens an agent would want tools for
+(search, browse, filter, list records, or the main interactive surfaces).
 
 For each one, report the exact full URL of that screen, taken from the address bar.
-Do not modify, create, or delete any data — only look.
+Stay on this origin. Do not modify, create, or delete any data — only look.
 Report at most 8 screens, best first.${hintText}`;
 
   log(`Dispatching ${AGENT} to explore ${target}`);

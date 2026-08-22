@@ -6,8 +6,8 @@ import type { ToolSpec } from "@/app/_lib/types";
 export async function POST(request: Request) {
   const body = (await request.json()) as {
     target: string;
-    username: string;
-    password: string;
+    username?: string;
+    password?: string;
     tool: string;
     args: Record<string, string>;
   };
@@ -22,7 +22,7 @@ export async function POST(request: Request) {
   try {
     const output = await runTool(
       body.target,
-      { username: body.username, password: body.password },
+      { username: body.username ?? "", password: body.password ?? "" },
       tool,
       body.args,
     );

@@ -102,6 +102,11 @@ export type ToolSpec = {
 
 export type Credentials = { username: string; password: string };
 
+/** Both fields filled — otherwise the target is treated as a public site. */
+export function hasCredentials(creds: Credentials): boolean {
+  return Boolean(creds.username.trim() && creds.password.trim());
+}
+
 /** The pipeline stages, in order. Used for SSE progress events. */
 export const STAGES = ["seed", "explore", "understand", "synthesize", "emit"] as const;
 export type StageName = (typeof STAGES)[number];

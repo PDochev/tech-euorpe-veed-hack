@@ -1,6 +1,6 @@
 import type { Page } from "playwright";
 import { harvest, launch, login } from "../driver/playwright";
-import type { Capability, Credentials, Screen, SiteMap } from "../types";
+import { hasCredentials, type Capability, type Credentials, type Screen, type SiteMap } from "../types";
 
 /**
  * Stage 2: build a map of the target app.
@@ -63,9 +63,11 @@ export const crawlExplorer: Explorer = async (ctx) => {
   const { browser, page } = await launch();
 
   try {
-    ctx.log(`Signing in to ${ctx.target}`);
+    ctx.log(
+      hasCredentials(ctx.creds) ? `Signing in to ${ctx.target}` : `Opening ${ctx.target}`,
+    );
     await login(page, ctx.target, ctx.creds);
-    ctx.log(`Signed in, landed on ${page.url()}`);
+    ctx.log(`Landed on ${page.url()}`);
 
     const screens: Screen[] = [];
     const origin = new URL(page.url()).origin;

@@ -16,10 +16,28 @@ const IDLE: Record<StageName, StageState> = {
 
 type RunResult = { output?: string; error?: string; ms?: number };
 
+const DEMO_TARGET = "https://opensource-demo.orangehrmlive.com";
+const isDemoTarget = (url: string) =>
+  url.includes("opensource-demo.orangehrmlive.com");
+
 export default function Console() {
-  const [target, setTarget] = useState("https://opensource-demo.orangehrmlive.com");
+  const [target, setTarget] = useState(DEMO_TARGET);
   const [username, setUsername] = useState("Admin");
   const [password, setPassword] = useState("admin123");
+
+  function onTargetChange(url: string) {
+    setTarget(url);
+    // Demo creds belong to OrangeHRM only. Leaving them on a public site
+    // would send the scout looking for a login that does not exist.
+    if (!isDemoTarget(url) && username === "Admin" && password === "admin123") {
+      setUsername("");
+      setPassword("");
+    }
+    if (isDemoTarget(url) && !username && !password) {
+      setUsername("Admin");
+      setPassword("admin123");
+    }
+  }
 
   const [states, setStates] = useState<Record<StageName, StageState>>(IDLE);
   const [lines, setLines] = useState<LogLine[]>([]);
@@ -161,13 +179,13 @@ export default function Console() {
           <input
             className="field w-full px-3 py-2.5 text-[13px]"
             value={target}
-            onChange={(e) => setTarget(e.target.value)}
-            placeholder="https://…"
+            onChange={(e) => onTargetChange(e.target.value)}
+            placeholder="https://www.awwwards.com"
           />
         </label>
         <label className="flex-1 min-w-[130px]">
           <span className="block text-[9.5px] uppercase tracking-[0.16em] text-[var(--color-ink-faint)] mb-1.5">
-            username
+            username · optional
           </span>
           <input
             className="field w-full px-3 py-2.5 text-[13px]"
@@ -177,7 +195,7 @@ export default function Console() {
         </label>
         <label className="flex-1 min-w-[130px]">
           <span className="block text-[9.5px] uppercase tracking-[0.16em] text-[var(--color-ink-faint)] mb-1.5">
-            password
+            password · optional
           </span>
           <input
             type="password"

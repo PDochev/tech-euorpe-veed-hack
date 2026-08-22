@@ -1,0 +1,289 @@
+[
+  {
+    "name": "search_nominees",
+    "description": "Search Awwwards nominated websites and return matching nominee cards.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Website, studio, category, technology, or keyword to search for among nominees."
+        }
+      },
+      "required": []
+    },
+    "recipe": [
+      {
+        "action": "goto",
+        "value": "https://www.awwwards.com/websites/nominees/"
+      },
+      {
+        "action": "fill",
+        "selector": "input[placeholder=\"Search by Websites\"]",
+        "arg": "query"
+      },
+      {
+        "action": "click",
+        "selector": "button[aria-label=\"Search\"]"
+      },
+      {
+        "action": "wait",
+        "ms": 2000
+      },
+      {
+        "action": "read",
+        "selector": "ul.grid-cards"
+      }
+    ],
+    "readSelector": "ul.grid-cards",
+    "derivedFrom": [
+      "s1"
+    ]
+  },
+  {
+    "name": "search_sites_of_the_day",
+    "description": "Search Awwwards Sites of the Day and return matching awarded website cards.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Website, creator, studio, category, technology, or keyword to search for among Sites of the Day."
+        }
+      },
+      "required": []
+    },
+    "recipe": [
+      {
+        "action": "goto",
+        "value": "https://www.awwwards.com/websites/sites_of_the_day/"
+      },
+      {
+        "action": "fill",
+        "selector": "input[placeholder=\"Search by Websites\"]",
+        "arg": "query"
+      },
+      {
+        "action": "click",
+        "selector": "button[aria-label=\"Search\"]"
+      },
+      {
+        "action": "wait",
+        "ms": 2000
+      },
+      {
+        "action": "read",
+        "selector": "ul.grid-cards"
+      }
+    ],
+    "readSelector": "ul.grid-cards",
+    "derivedFrom": [
+      "s2"
+    ]
+  },
+  {
+    "name": "search_directory",
+    "description": "Search the Awwwards professional directory and return matching agency, studio, and freelancer cards.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Professional, agency, studio, country, service, or keyword to search for in the directory."
+        }
+      },
+      "required": []
+    },
+    "recipe": [
+      {
+        "action": "goto",
+        "value": "https://www.awwwards.com/directory/"
+      },
+      {
+        "action": "fill",
+        "selector": "input[placeholder=\"Search by Directory\"]",
+        "arg": "query"
+      },
+      {
+        "action": "click",
+        "selector": "button[aria-label=\"Search\"]"
+      },
+      {
+        "action": "wait",
+        "ms": 2000
+      },
+      {
+        "action": "read",
+        "selector": "ul.grid-cards"
+      }
+    ],
+    "readSelector": "ul.grid-cards",
+    "derivedFrom": [
+      "s3"
+    ]
+  },
+  {
+    "name": "search_collections",
+    "description": "Search Awwwards inspiration collections and return matching collection cards.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Collection topic, visual style, design pattern, or keyword to search for."
+        }
+      },
+      "required": []
+    },
+    "recipe": [
+      {
+        "action": "goto",
+        "value": "https://www.awwwards.com/collections/"
+      },
+      {
+        "action": "fill",
+        "selector": "input[placeholder=\"Search by Collections\"]",
+        "arg": "query"
+      },
+      {
+        "action": "click",
+        "selector": "button[aria-label=\"Search\"]"
+      },
+      {
+        "action": "wait",
+        "ms": 2000
+      },
+      {
+        "action": "read",
+        "selector": "ul.grid-cards"
+      }
+    ],
+    "readSelector": "ul.grid-cards",
+    "derivedFrom": [
+      "s4"
+    ]
+  },
+  {
+    "name": "search_academy_courses",
+    "description": "Search Awwwards Academy courses and return matching course cards.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Course topic, tool, skill, instructor, or keyword to search for in Academy courses."
+        }
+      },
+      "required": []
+    },
+    "recipe": [
+      {
+        "action": "goto",
+        "value": "https://www.awwwards.com/academy/"
+      },
+      {
+        "action": "fill",
+        "selector": "input[placeholder=\"Search by Academy courses\"]",
+        "arg": "query"
+      },
+      {
+        "action": "click",
+        "selector": "button[aria-label=\"Search\"]"
+      },
+      {
+        "action": "wait",
+        "ms": 2000
+      },
+      {
+        "action": "read",
+        "selector": "ul.grid-academy"
+      }
+    ],
+    "readSelector": "ul.grid-academy",
+    "derivedFrom": [
+      "s5"
+    ]
+  },
+  {
+    "name": "search_blog",
+    "description": "Search the Awwwards blog and return matching web design article cards.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Article title, author, topic, category, trend, or keyword to search for on the blog."
+        }
+      },
+      "required": []
+    },
+    "recipe": [
+      {
+        "action": "goto",
+        "value": "https://www.awwwards.com/blog/"
+      },
+      {
+        "action": "fill",
+        "selector": "input[placeholder=\"Search by Blog\"]",
+        "arg": "query"
+      },
+      {
+        "action": "click",
+        "selector": "button[aria-label=\"Search\"]"
+      },
+      {
+        "action": "wait",
+        "ms": 2000
+      },
+      {
+        "action": "read",
+        "selector": "ul.grid-blog"
+      }
+    ],
+    "readSelector": "ul.grid-blog",
+    "derivedFrom": [
+      "s6"
+    ]
+  },
+  {
+    "name": "search_jobs",
+    "description": "Search Awwwards job listings and return matching web design and development opportunities.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "job_title": {
+          "type": "string",
+          "description": "Job title, role, company, location, skill, or keyword to search for in job listings."
+        }
+      },
+      "required": []
+    },
+    "recipe": [
+      {
+        "action": "goto",
+        "value": "https://www.awwwards.com/jobs/"
+      },
+      {
+        "action": "fill",
+        "selector": "input[placeholder=\"Search by Jobs\"]",
+        "arg": "job_title"
+      },
+      {
+        "action": "click",
+        "selector": "button[aria-label=\"Search\"]"
+      },
+      {
+        "action": "wait",
+        "ms": 2000
+      },
+      {
+        "action": "read",
+        "selector": "ul.grid-cards"
+      }
+    ],
+    "readSelector": "ul.grid-cards",
+    "derivedFrom": [
+      "s7"
+    ]
+  }
+]

@@ -1,0 +1,47 @@
+[
+  {
+    "name": "Submit a website for award evaluation",
+    "description": "Register and submit a website so it can be reviewed by Awwwards for recognition.",
+    "source": "tavily"
+  },
+  {
+    "name": "Review account settings",
+    "description": "View and manage personal account settings in the platform.",
+    "source": "tavily"
+  },
+  {
+    "name": "Read the user manual",
+    "description": "Open the user guide to learn how the platform works and how to use its tools.",
+    "source": "tavily"
+  },
+  {
+    "name": "Browse award results",
+    "description": "Inspect winners, nominees, Sites of the Day, and Sites of the Month.",
+    "source": "tavily"
+  },
+  {
+    "name": "Access course content",
+    "description": "Find and watch courses in the Academy, including the Creative Pass offerings.",
+    "source": "tavily"
+  },
+  {
+    "name": "Search the professional directory",
+    "description": "Look up professionals, freelancers, agencies, and studios listed on the platform.",
+    "source": "tavily"
+  },
+  {
+    "name": "Explore inspiration galleries",
+    "description": "Browse collections and elements for design inspiration and reference examples.",
+    "source": "tavily"
+  },
+  {
+    "name": "Review pricing and plan benefits",
+    "description": "Compare user plans and see included pro features, discounts, and access perks.",
+    "source": "tavily"
+  },
+  {
+    "name": "Discover jobs and blog content",
+    "description": "Browse job listings and read blog articles related to web design and development.",
+    "source": "tavily"
+  }
+]

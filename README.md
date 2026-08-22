@@ -120,7 +120,7 @@ This is the one stage with **no model in it, by choice.** It is the highest-volu
 pipeline — 230 verdicts for this one app, one per control — and the judgment each one needs is
 shallow: "Delete" is destructive, a `<select>` narrows a result set, a field labelled "Employee
 Name" holds a person. Sending that to a frontier model would add hundreds of calls to every compile
-to answer questions a rule table answers in microseconds, and answers the *same way every run*.
+to answer questions a rule table answers in microseconds, and answers the _same way every run_.
 That reproducibility is the point: recompiling an app twice yields the same tools.
 
 The honest cost of that choice is that the rules read English label text, which is the main thing
@@ -151,8 +151,8 @@ deliberately using none of them.
 
 | Partner    | Where                                      | What it does                                                                                | Without it                                                                       |
 | ---------- | ------------------------------------------ | ------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| **Tavily** | `app/_lib/stages/seed.ts`                  | Finds public docs for the target app and distils them into task-shaped capabilities         | The explorer has no goals; tool descriptions come from DOM text and read like it  |
-| **h**      | `app/_lib/stages/h-scout.ts`               | Computer-use agent logs in, looks at the app, returns the URLs of screens that hold records | Falls back to a blind BFS crawl, which missed 2 of the 8 record screens           |
+| **Tavily** | `app/_lib/stages/seed.ts`                  | Finds public docs for the target app and distils them into task-shaped capabilities         | The explorer has no goals; tool descriptions come from DOM text and read like it |
+| **h**      | `app/_lib/stages/h-scout.ts`               | Computer-use agent logs in, looks at the app, returns the URLs of screens that hold records | Falls back to a blind BFS crawl, which missed 2 of the 8 record screens          |
 | **OpenAI** | `app/_lib/stages/seed.ts`, `synthesize.ts` | Distils capabilities; compiles screens + labels into typed tools with step recipes          | No tool synthesis — the pipeline stops at a site map                             |
 
 Playwright is the deterministic runtime underneath all of it (`app/_lib/driver/`), and

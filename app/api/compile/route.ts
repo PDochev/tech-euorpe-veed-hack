@@ -10,8 +10,8 @@ import type { StageEvent } from "@/app/_lib/types";
 export async function POST(request: Request) {
   const body = (await request.json()) as {
     target: string;
-    username: string;
-    password: string;
+    username?: string;
+    password?: string;
     force?: string[];
     skipScout?: boolean;
   };
@@ -26,7 +26,7 @@ export async function POST(request: Request) {
       try {
         for await (const event of compile({
           target: body.target,
-          creds: { username: body.username, password: body.password },
+          creds: { username: body.username ?? "", password: body.password ?? "" },
           force: body.force,
           skipScout: body.skipScout,
         })) {
