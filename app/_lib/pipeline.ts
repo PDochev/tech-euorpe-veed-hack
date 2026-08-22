@@ -150,5 +150,5 @@ export async function* compile(opts: CompileOptions): AsyncGenerator<StageEvent>
     cached: false,
   };
 
-  yield { type: "result", siteMap, labels, tools };
+  yield { type: "result", siteMap, labels, tools, serverPath: emitted.serverPath };
 }

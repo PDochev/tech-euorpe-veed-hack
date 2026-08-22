@@ -13,6 +13,11 @@ import type {
   ToolSpec,
 } from "./_lib/types";
 
+/** Pluralise a count: 1 control, 2 controls. */
+function count(n: number, singular: string, plural = `${singular}s`): string {
+  return `${n} ${n === 1 ? singular : plural}`;
+}
+
 const IDLE: Record<StageName, StageState> = {
   seed: { status: "idle", label: "Read the app's documentation" },
   explore: { status: "idle", label: "Scout the app and harvest selectors" },
@@ -51,6 +56,7 @@ export default function Console() {
   const [compiling, setCompiling] = useState(false);
   const [siteMap, setSiteMap] = useState<SiteMap | null>(null);
   const [tools, setTools] = useState<ToolSpec[]>([]);
+  const [serverPath, setServerPath] = useState<string | null>(null);
   const [results, setResults] = useState<Record<string, RunResult>>({});
   const [runningTool, setRunningTool] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
@@ -61,6 +67,7 @@ export default function Console() {
     setStates(IDLE);
     setLines([]);
     setTools([]);
+    setServerPath(null);
     setSiteMap(null);
     setResults({});
 
@@ -90,6 +97,7 @@ export default function Console() {
         if (event.type === "result") {
           setSiteMap(event.siteMap);
           setTools(event.tools);
+          setServerPath(event.serverPath);
           continue;
         }
 
@@ -166,7 +174,7 @@ export default function Console() {
       mcpServers: {
         portico: {
           command: "npx",
-          args: ["tsx", "<absolute-path-to-this-repo>/mcp-server/server.mts"],
+          args: ["tsx", serverPath ?? "<absolute-path-to-this-repo>/mcp-server/server.mts"],
           ...(username.trim() && password.trim()
             ? {
                 env: { PORTICO_USERNAME: username, PORTICO_PASSWORD: password },
@@ -283,7 +291,7 @@ export default function Console() {
           <div className="flex items-baseline gap-3 mb-4">
             <h2 className="display text-[19px]">Screens discovered</h2>
             <span className="text-[10.5px] text-[var(--color-ink-faint)]">
-              {siteMap.screens.length} screens · {elementCount} controls
+              {count(siteMap.screens.length, "screen")} · {count(elementCount, "control")}
             </span>
           </div>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -314,8 +322,8 @@ export default function Console() {
                     {screenLabel(s.url, s.title)}
                   </p>
                   <p className="text-[10px] text-[var(--color-ink-faint)] mt-0.5">
-                    {s.elements.length} controls · {s.resultContainers.length}{" "}
-                    result sets
+                    {count(s.elements.length, "control")} ·{" "}
+                    {count(s.resultContainers.length, "result set")}
                   </p>
                 </figcaption>
               </figure>
@@ -325,7 +333,7 @@ export default function Console() {
             <ScreenModal
               src={preview.screenshot}
               title={screenLabel(preview.url, preview.title)}
-              caption={`${preview.elements.length} controls · ${preview.resultContainers.length} result sets · ${preview.url}`}
+              caption={`${count(preview.elements.length, "control")} · ${count(preview.resultContainers.length, "result set")} · ${preview.url}`}
               onClose={() => setPreview(null)}
             />
           )}

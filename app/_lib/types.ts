@@ -116,4 +116,11 @@ export type StageEvent =
   | { type: "stage:log"; stage: StageName; message: string }
   | { type: "stage:done"; stage: StageName; summary: string; cached: boolean }
   | { type: "stage:error"; stage: StageName; message: string }
-  | { type: "result"; siteMap: SiteMap; labels: Labeled[]; tools: ToolSpec[] };
+  | {
+      type: "result";
+      siteMap: SiteMap;
+      labels: Labeled[];
+      tools: ToolSpec[];
+      /** Absolute path of the emitted server, so the UI can show a config that actually works. */
+      serverPath: string;
+    };
