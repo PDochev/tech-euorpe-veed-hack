@@ -153,7 +153,7 @@ The emitted server is standalone and contains no model calls. It shares one runt
 | Partner    | Where                                      | What it does                                                                                | Without it                                                                       |
 | ---------- | ------------------------------------------ | ------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | **Tavily** | `app/_lib/stages/seed.ts`                  | Finds public docs for the target app and distils them into task-shaped capabilities         | The explorer has no goals; tool descriptions come from DOM text and read like it |
-| **h**      | `app/_lib/stages/h-scout.ts`               | Computer-use agent logs in, looks at the app, returns the URLs of screens that hold records | Falls back to a blind BFS crawl, which missed 4 of the 8 record screens          |
+| **h**      | `app/_lib/stages/h-scout.ts`               | Computer-use agent logs in, looks at the app, returns the URLs of screens that hold records | Falls back to a one-hop link crawl, which cannot reach the Admin sub-pages — Job Titles, Pay Grades, Org Structure and Skills are two clicks from the dashboard          |
 | **OpenAI** | `app/_lib/stages/seed.ts`, `synthesize.ts` | Distils capabilities; compiles screens + labels into typed tools with step recipes          | No tool synthesis — the pipeline stops at a site map                             |
 
 Playwright is the deterministic runtime underneath all of it (`app/_lib/driver/`), and

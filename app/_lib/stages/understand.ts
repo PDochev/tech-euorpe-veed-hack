@@ -40,7 +40,8 @@ const ENTITIES: [RegExp, string][] = [
   [/name|employee|person|user|candidate/, "person_name"],
 ];
 
-const entityFor = (label: string) => ENTITIES.find(([re]) => re.test(label))?.[1];
+const entityFor = (label: string) =>
+  ENTITIES.find(([re]) => re.test(label))?.[1];
 
 /** Classify one control from its label, element kind and input type. */
 export function classify(
@@ -53,8 +54,12 @@ export function classify(
   if (/delete|remove|destroy|purge|discard|void|cancel order/.test(l)) {
     return { semantic: "destructive" };
   }
-  if (/^\+|add|create|new\b|register|assign/.test(l)) return { semantic: "create" };
-  if (/^\d+$/.test(l) || /next|previous|prev\b|first|last|load more|page/.test(l)) {
+  if (/^\+|add|create|new\b|register|assign/.test(l))
+    return { semantic: "create" };
+  if (
+    /^\d+$/.test(l) ||
+    /next|previous|prev\b|first|last|load more|page/.test(l)
+  ) {
     return { semantic: "pagination" };
   }
 
