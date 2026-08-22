@@ -223,13 +223,15 @@ them empty for a public site. The OrangeHRM sandbox
 
 ### Running with no API keys at all
 
-```bash
-REPLAY=1 npm run dev                    # the console, served from fixtures
-REPLAY=1 npx tsx scripts/compile.ts     # the same pipeline, headless
-```
+Every stage output is committed to `fixtures/`. `REPLAY=1` serves the pipeline from those files
+instead of calling anything, so a fresh clone with **no `.env.local` and no accounts** still runs the
+whole compiler:
 
-Replay mode serves every stage from the committed fixtures in `fixtures/`, with realistic pacing
-and no network calls:
+```bash
+REPLAY=1 npm run dev                                          # the console, from fixtures
+REPLAY=1 npx tsx scripts/compile.ts                           # the same pipeline, headless
+REPLAY=1 TARGET=https://www.awwwards.com npx tsx scripts/compile.ts   # the no-login target
+```
 
 ```
 [seed]        ✓ 10 documented capabilities (cached)
@@ -386,4 +388,4 @@ Where this is honestly weak:
 
 ---
 
-Built at Tech: Europe Hackathon, London.
+Built at Tech Europe Hackathon, London.
