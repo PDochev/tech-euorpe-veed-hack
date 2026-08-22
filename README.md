@@ -136,7 +136,7 @@ to answer questions a rule table answers in microseconds, and answers the _same 
 That reproducibility is the point: recompiling an app twice yields the same tools.
 
 The honest cost of that choice is that the rules read English label text, which is the main thing
-standing between this and "works on any admin panel". See §9.
+standing between this and "works on any admin panel". See §8.
 
 ### Stage 4 — synthesize (`app/_lib/stages/synthesize.ts`)
 
