@@ -43,7 +43,7 @@ server (`mcp-server/server.mts`) contains no LLM calls whatsoever — grep it an
 
 ## 3. Demo
 
-**Video:** _(2-minute walkthrough — add the link here before submitting)_
+**Video:** [2-minute walkthrough](https://www.loom.com/share/0fb52888f1dd4192bfedf354c985cc7b)
 
 The walkthrough below is a real run against the [OrangeHRM public
 demo](https://opensource-demo.orangehrmlive.com) (`Admin` / `admin123`) — their hosted sandbox of
