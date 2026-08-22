@@ -14,7 +14,7 @@ what each control does, and writes a standalone MCP server with typed tools that
 
 A great deal of working software has no API you can use. Internal admin panels, council portals,
 twenty-year-old HR systems: the data is right there on screen and completely unreachable by an
-agent. And where an API does exist, it is often not one you can get at — wrong tier, no credentials,
+agent. And where an API does exist, it is often not one you can get at - wrong tier, no credentials,
 or a procurement conversation you are not going to win today.
 
 Today there are two options, and both are bad. Either the task goes unautomated, or the agent burns
@@ -23,7 +23,7 @@ around, spending seconds and cents to answer "what is Linda Anderson's employee 
 question twice and you pay twice.
 
 Portico makes it a compile step. You pay an agent **once** to understand the app, and from then on
-the same question is one typed MCP tool call — a page load and three DOM actions, no model, no
+the same question is one typed MCP tool call - a page load and three DOM actions, no model, no
 reasoning, no drift. On the OrangeHRM demo below, that call returns a structured record in **about
 11 seconds** and costs nothing but the page load.
 
@@ -33,7 +33,7 @@ reasoning, no drift. On the OrangeHRM demo below, that call returns a structured
 
 This is the whole idea, and everything in the repo follows from it.
 
-Understanding an unfamiliar UI genuinely needs intelligence — reading a screen, telling a records
+Understanding an unfamiliar UI genuinely needs intelligence - reading a screen, telling a records
 table from a settings pane, knowing that "Employee Name" is a person and "Sub Unit" is a filter.
 That is a job for an agent, and it is worth paying real money for.
 
@@ -42,7 +42,7 @@ and the field, calling the tool is a script. Every model call at execution time 
 and a chance to hallucinate.
 
 So Portico puts all the intelligence in the compiler and none in the runtime. The generated MCP
-server (`mcp-server/server.mts`) contains no LLM calls whatsoever — grep it and see.
+server (`mcp-server/server.mts`) contains no LLM calls whatsoever.
 
 ## 3. Demo
 
